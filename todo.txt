@@ -1,0 +1,37 @@
+promover esquema do banco.
+	fazer quadradinhos com as coisas que terão no banco!!!
+	linhas provem interligações!
+criar apresena~ções para cada aula!
+	apresentações idnividuais e em grupo!
+sftdelete!?
+
+permissões de acesso ao sistema
+postgre -> redis
+
+estrutural do backend --> como fazer!?
+como integradar back e front
+
+planejamento bom! ver isso com cuidado!!!
+
+traceID
+
+framework --> 
+
+supabase
+aneme ou aleme - python
+fastApi - Python
+
+analise do problema enumeração dos elemetnot dods daddos 
+ibge, enap, 
+renda, idh, acesso , siuação de vulnerabiliadae, sgenere, 
+
+dicionario de dados!
+matriz de vizualização
+
+junção com GIS
+
+como começa isso!
+
+elementos do sistema
+
+fase exploratória de dados... descobrir o que vai ter no sistema!
