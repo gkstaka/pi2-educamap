@@ -33,6 +33,7 @@ Caso tenha instalado um pacote que ainda não estava no projeto, utilize o coman
 ## 03 - Ferramentas
 No momento, estamos usando Pandas do Python para leitura de dados.
 Para a geolocalização, estamos sondando usar o StreamLit por suas bibliotecas pre-definitas.
+
 A ser definido como usar banco de dados - [Container Docker citado como uma das opções]
 
 ## 04 - Links úteis
