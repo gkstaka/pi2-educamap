@@ -1,13 +1,13 @@
 # EduMapa
 O __Edumapa__ é uma ferramenta de inteligência geográfica voltada para o planejamento educacional no Distrito Federal. Utilizando os dados do INEP e do INGE, o projeto permite visualizar a densidade escolar e a abrangência de atendimento de cada unidade.
 
-Os locais quw tenha falta de abranvrncia, visualizadas pelo mapa, devem ser possiveis focos de atencao parao. planejamento e desenvolvimwnto. 
+Os locais que tenha falta de abrangência, visualizadas pelo mapa, devem ser possíveis focos de atencao para o planejamento e desenvolvimento. 
 ### Funcionalidades
-- Calculo de abrangencia baseado na quantidade de matriculas possiveis para gefar um raio decabrangencia a partir da escola.
+- Cálculo de abrangência baseado na quantidade de matrículas possíveis para gerar um raio decabrangencia a partir da escola.
 
-- Filtros dinâmicos baseado no tipo de escola rurql ou urbana para modificar o raio de abrangencia. 
+- Filtros dinâmicos baseado no tipo de escola rural ou urbana para modificar o raio de abrangência. 
 
-- observacoes sobre escolas publicas e privadas para uma vidao geral maia objetiva.
+- Observações sobre escolas públicas e privadas para uma visão geral mais objetiva.
 
 - ... TBD
 
@@ -30,7 +30,12 @@ Se for necessário atualizar os imports do projeto, use:
 Caso tenha instalado um pacote que ainda não estava no projeto, utilize o comando para adicioná-lo as dependencias:
 `pip freeze > requirements.txt`
 
-## 03 - Links úteis
+## 03 - Ferramentas
+No momento, estamos usando Pandas do Python para leitura de dados.
+Para a geolocalização, estamos sondando usar o StreamLit por suas bibliotecas pre-definitas.
+A ser definido como usar banco de dados - [Container Docker citado como uma das opções]
+
+## 04 - Links úteis
 Instituto de Estudos e Pesquisas Educacionais - [INEP](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/inep-data)
  
 Instituto Brasileiro de Geografia e Estatística - [IBGE](https://www.ibge.gov.br/estatisticas/sociais/educacao.html)
