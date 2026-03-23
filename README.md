@@ -9,6 +9,8 @@ Filtros dinâmicos baseado no tipo de escola rurql ou urbana para modificar o ra
 
 observacoes sobre escolas publicas e privadas para uma vidao geral maia objetiva.
 
+... TBD
+
 ## 01 - Rodar ambiente virtual
 Criar o ambiente virtual em sua máquina com o comando:
 > python -m venv venv
