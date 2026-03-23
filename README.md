@@ -40,3 +40,9 @@ A ser definido como usar banco de dados - [Container Docker citado como uma das 
 Instituto de Estudos e Pesquisas Educacionais - [INEP](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/inep-data)
  
 Instituto Brasileiro de Geografia e Estatística - [IBGE](https://www.ibge.gov.br/estatisticas/sociais/educacao.html)
+
+## Integrantes 
+Antônio Alexandre Cavalcante Leite
+Carlos Eduardo Sousa Barcelos
+Gustavo Kooiti Silva Takahashi
+Lanay Guimarães de Paiva
