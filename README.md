@@ -23,10 +23,10 @@ Rodar o comando abaixo para ativar o ambiente virtual:
 ## 02 - Requesitos
 [adicionar pyenv para gerenciamento de versao python wio
 
-pyenv --version para verificar]
+pyenv --version para verificar ae tem instalado]
 
 Se for necessário atualizar os imports do projeto, use:
-> `pip install -r requirements.txt`
+`pip install -r requirements.txt`
 
 Caso tenha instalado um pacote que ainda não estava no projeto, utilize o comando para adicioná-lo as dependencias:
 > pip freeze > requirements.txt
