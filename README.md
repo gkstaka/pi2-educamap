@@ -2,10 +2,13 @@
 O projeto EduMapa visa 
 
 ## 01 - Rodar ambiente virtual
+Criar o ambiente virtual em sua máquina com o comando:
+> python -m venv venv
+
 Rodar o comando abaixo para ativar o ambiente virtual:
 > Para Windows: .\venv\Scripts\activate
 >
-> Para Linux/macOS: ./venv/Scripts/activate
+> BASH: source venv/Scripts/activate
 
 ## 02 - Requesitos
 Se for necessário atualizar os imports do projeto, use:
