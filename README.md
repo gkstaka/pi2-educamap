@@ -16,3 +16,4 @@ Caso tenha instalado um pacote que ainda não estava no projeto, utilize o coman
 
 ## 03 - Links úteis
 Instituto de Estudos e Pesquisas Educacionais - [INEP](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/inep-data) 
+Instituto Brasileiro de Geografia e Estatística - [IBGE](https://www.ibge.gov.br/estatisticas/sociais/educacao.html)
