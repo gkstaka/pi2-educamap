@@ -21,10 +21,12 @@ Rodar o comando abaixo para ativar o ambiente virtual:
 > BASH: source venv/Scripts/activate
 
 ## 02 - Requesitos
-[adicionar pyenv para gerenciamento de versao python wip]
+[adicionar pyenv para gerenciamento de versao python wio
+
+pyenv --version para verificar]
 
 Se for necessário atualizar os imports do projeto, use:
-> pip install -r requirements.txt
+> `pip install -r requirements.txt`
 
 Caso tenha instalado um pacote que ainda não estava no projeto, utilize o comando para adicioná-lo as dependencias:
 > pip freeze > requirements.txt
