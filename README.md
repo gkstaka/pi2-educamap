@@ -3,7 +3,7 @@ O __Edumapa__ é uma ferramenta de inteligência geográfica voltada para o plan
 
 Os locais quw tenha falta de abranvrncia, visualizadas pelo mapa, devem ser possiveis focos de atencao parao. planejamento e desenvolvimwnto. 
 ### Funcionalidades
-Calculo de abrangencia baseado na quantidade de matriculas possiveis para gefar um raio decabrangencia a partir da escola.
+• Calculo de abrangencia baseado na quantidade de matriculas possiveis para gefar um raio decabrangencia a partir da escola.
 
 Filtros dinâmicos baseado no tipo de escola rurql ou urbana para modificar o raio de abrangencia. 
 
