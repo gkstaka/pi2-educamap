@@ -21,6 +21,8 @@ Rodar o comando abaixo para ativar o ambiente virtual:
 > BASH: source venv/Scripts/activate
 
 ## 02 - Requesitos
+[adicionar pyenv para gerenciamento de versao python wip]
+
 Se for necessário atualizar os imports do projeto, use:
 > pip install -r requirements.txt
 
