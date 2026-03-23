@@ -12,7 +12,7 @@ Os locais quw tenha falta de abranvrncia, visualizadas pelo mapa, devem ser poss
 - ... TBD
 
 ## 01 - Rodar ambiente virtual
-Criar o ambiente virtual em sua máquina com o comando:
+Após clonar o repositório, navegue para a pasta principal do projeto e crie o ambiente virtual em sua máquina com o comando:
 > python -m venv venv
 
 Rodar o comando abaixo para ativar o ambiente virtual:
@@ -24,7 +24,7 @@ Rodar o comando abaixo para ativar o ambiente virtual:
 Se for necessário atualizar os imports do projeto, use:
 > pip install -r requirements.txt
 
-Caso tenha instalado um pacote que ainda não estava no projeto, utilize o comando:
+Caso tenha instalado um pacote que ainda não estava no projeto, utilize o comando para adicioná-lo as dependencias:
 > pip freeze > requirements.txt
 
 ## 03 - Links úteis
