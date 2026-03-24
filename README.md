@@ -1,6 +1,24 @@
 # EduMapa
 O __Edumapa__ é uma ferramenta de inteligência geográfica voltada para o planejamento educacional no Distrito Federal. Utilizando os dados do INEP e do INGE, o projeto permite visualizar a densidade escolar e a abrangência de atendimento de cada unidade.
 
+## Problema
+Muitas cidades brasileiras possuem "desertos educacionais" - regiões onde a oferta de escolas, biliotecas e equipamentos de educação é insuficiente ou inexistente. Esses territórios são difícies de identificar sem cruzamento de dados georreferenciados.
+
+## Proposta de solução
+Um mapa interativo que cruza dados públicos georreferenciados (localização de escolas, dados do Cenco, transporte público, renda) para identificar e visualizar áreas carentes de infraestrutura educacional, gerando alertas e relatórios para tomada de decisão.
+
+## Público-alvo
+Gestores públicos minicipais (Secretarias de Educação), ONGs que atuem em educação, pesquisadores urbanos e organizadores comunitários.
+
+## Funcionalidades-chave
+Mapa interativo com camadas de dados (escolas, população em idade escolar, transporte, renda); identificação automática de "desertos educacionais" por algoritmo de cruzamento; filtros por nível de ensino, faixa etária e tipo de equipamento; geração de relatórios por região; histórico temporal para acompanhar a evolução.
+
+## Impacto esperado
+Tornar visíveis as lacunas educacionais no território urbano, permitindo que gestores e ONGs direcionem recursos e açoes para onde são mais necessários, com base em evidências geográficas concretas.
+
+## ODS 4 - Conexão
+Meta 4.a - Construir e melhorar instalações físicas para educação apropriadas para crianças e sensíveis às deficiências e a gênero, proporcionando ambientes de aprendizagem seguros e inclusivos.
+
 Os locais que tenha falta de abrangência, visualizadas pelo mapa, devem ser possíveis focos de atencao para o planejamento e desenvolvimento. 
 ### Funcionalidades
 - Cálculo de abrangência baseado na quantidade de matrículas possíveis para gerar um raio decabrangencia a partir da escola.
