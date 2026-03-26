@@ -1,7 +1,3 @@
-Para concluir o projeto **EduMapa (pi2-educamap)**, você deve transformar os estudos iniciais contidos nos notebooks em uma aplicação funcional, seguindo as metas e funcionalidades pendentes descritas no repositório.
-
-Aqui está um roteiro baseado nas informações dos documentos:
-
 ### 1. Finalizar a Integração e o Processamento de Dados
 *   **Consolidar bases de dados:** Garanta que o cruzamento entre os dados do **INEP** e do **IBGE** (Censo) esteja totalmente funcional para identificar a densidade populacional em idade escolar versus a localização das unidades de ensino.
 *   **Implementar novas tabelas:** Utilize as novas tabelas de dados que foram adicionadas recentemente ao repositório para enriquecer a análise.
