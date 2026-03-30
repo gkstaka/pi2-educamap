@@ -191,3 +191,6 @@ como começa isso!
 elementos do sistema
 
 fase exploratória de dados... descobrir o que vai ter no sistema!
+
+## Ver
+Poetry - SidraAPI em python
