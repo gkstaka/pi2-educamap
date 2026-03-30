@@ -62,7 +62,7 @@ https://paineis-ext.mpdft.mp.br/extensions/mashupeducacao/mashupeducacao.html
 https://governancaeducadf.se.df.gov.br/portal-dados/
 
 ## Integrantes 
-Antônio Alexandre Cavalcante Leite
-Carlos Eduardo Sousa Barcelos
-Gustavo Kooiti Silva Takahashi
-Lanay Guimarães de Paiva
+Antônio Alexandre Cavalcante Leite\n
+Carlos Eduardo Sousa Barcelos\n
+Gustavo Kooiti Silva Takahashi\n
+Lanay Guimarães de Paiva\n
