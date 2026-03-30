@@ -63,6 +63,6 @@ https://governancaeducadf.se.df.gov.br/portal-dados/
 
 ## Integrantes 
 Antônio Alexandre Cavalcante Leite<br>
-Carlos Eduardo Sousa Barcelos
-Gustavo Kooiti Silva Takahashi
+Carlos Eduardo Sousa Barcelos<br>
+Gustavo Kooiti Silva Takahashi<br>
 Lanay Guimarães de Paiva
