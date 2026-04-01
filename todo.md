@@ -194,3 +194,6 @@ fase exploratória de dados... descobrir o que vai ter no sistema!
 
 ## Ver
 Poetry - SidraAPI em python
+
+## Bilbiocas adicionadas 
+streamlit, streamlit-folium, folium, geopy, pandas
