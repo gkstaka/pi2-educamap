@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_folium import st_folium
 import folium
 import pandas as pd
+from pathlib import Path
 # from geopy.geocoders import Nominatim
 
 st.set_page_config(layout="wide")
@@ -18,9 +19,16 @@ st.markdown("""
 
 st.title("EducaMap")
 
-# city_name = st.text_input("Digite o nome da cidade:", placeholder="ex. Paris, Toquio, Londres")
+# Construct an absolute path to the data relative to this script's location.
+# __file__ is /tests/teste_2.py, so .parent.parent is the project root.
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_PATH = BASE_DIR / 'data' / 'Catalogo_Escola' / 'Análise - Tabela da lista das escolas - Detalhado.csv'
 
-df = pd.read_csv('Analise-Tabela_da_lista_das_escolas-Detalhado.csv')
+try:
+    df = pd.read_csv(DATA_PATH)
+except Exception as e:
+    st.error(f"Erro ao carregar os dados: {e}")
+    df = pd.DataFrame() # Fallback to empty dataframe
 
 location = [-15.793889, -47.8828]
 zoom = 10.5
