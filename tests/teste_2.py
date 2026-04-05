@@ -2,50 +2,93 @@ import streamlit as st
 from streamlit_folium import st_folium
 import folium
 import pandas as pd
-# from geopy.geocoders import Nominatim
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_title="EducaMap")
 
 st.markdown("""
     <style>
-    .main > div {
-        padding-left = 0rem;
-        padding-right = 0rem;
-        padding-top = 0rem;
+    .block-container {
+        padding-top: 0rem;
+        padding-bottom: 0rem;
+        padding-left: 0rem;
+        padding-right: 0rem;
     }
     </style>
     """, unsafe_allow_html=True)
 
-st.title("EducaMap")
+st.title("EducaMap - Visualização de Escolas")
 
-# city_name = st.text_input("Digite o nome da cidade:", placeholder="ex. Paris, Toquio, Londres")
+# def load_data():
+#     df = pd.read_csv('Analise-Tabela_da_lista_das_escolas-Detalhado.csv')
+#     df_clean = df.dropna(subset=['Latitude', 'Longitude'])
+#     return df, df_clean
 
-df = pd.read_csv('Analise-Tabela_da_lista_das_escolas-Detalhado.csv')
+@st.cache_data # Cache para não ler o arquivo toda hora que interagir com o mapa
+def load_data():
+    df = pd.read_csv('Analise-Tabela_da_lista_das_escolas-Detalhado.csv')
+    
+    for col in ['Latitude', 'Longitude']:
+        df[col] = pd.to_numeric(df[col].astype(str).str.replace(',', '.'), errors='coerce')
+    
+    df_clean = df.dropna(subset=['Latitude', 'Longitude'])
+    return df, df_clean
 
-location = [-15.793889, -47.8828]
-zoom = 10.5
+df_completo, df_escola = load_data()
 
-# if city_name:
-#     geolocator = Nominatim(user_agent="streamlit_map_app")
-#     location_data = geolocator.geocode(city_name)
-#
-#     if location_data:
-#         location = [location_data.latitude, location_data.longitude]
-#         zoom=10
-#         st.success(f"Encontrou: {location_data.address}")
-#     else:
-#         st.error("Cidade não encontrada! Mostrando Brasília!")
-#
-m = folium.Map(location=location, zoom_start=zoom)
-
+location_brl = [-15.793889, -47.8828]
+m = folium.Map(location=location_brl, zoom_start=11, tiles="OpenStreetMap")
 folium.Marker(
-    location,
-    #popup=f"Olá de {city_name or 'Brasília'}!",
-    popup="Olá Brasília!",
+    location=location_brl,
+    popup="Brasília",
     tooltip="Clique aqui",
-    icon=folium.Icon(color="red", icon="heart", prefix="fa")
+    icon=folium.Icon(color="red", icon="home", prefix="fa")
 ).add_to(m)
 
-st_folium(m, width="100%", height=900, use_container_width=True)
+# WARNING: Carrega todas as escolas! ------------------------------------
+# for i, row in df_escola.iterrows():
+#     folium.Marker(
+#         location=[row['Latitude'], row['Longitude']],
+#         popup=f"<b>{row['Escola']}</b><br>{row['Endereço']}",
+#         tooltip=row['Escola'],
+#         icon=folium.Icon(color="blue", icon="graduation-cap", prefix="fa")
+#     ).add_to(m)
 
-st.write(df)
+# WARNING: Carrega apenas 50 escolas -------------------------------------
+# TODO: Traduzir o campo Porte da Escola para um valor numérioco para 
+# efetuação dos calculos do tamanho dos raios.
+for i, row in df_escola.head(75).iterrows():
+    is_privada = str(row['Categoria Administrativa']).strip().upper() == 'PRIVADA'
+
+    cor_raio = "gray" if is_privada else "blue"
+    cor_marker = "gray" if is_privada else "blue"
+    # opacidade = 0.1 if is_privada else 0.1
+
+    folium.Circle(
+        location=[row['Latitude'], row['Longitude']],
+        # TODO: Aqui deverá ter o raio calculado segundo o porte da escola.
+        radius=500, # 500 metros
+        color=cor_raio,
+        fill=True,
+        fill_color=cor_raio,
+        fill_opacity=0.1,
+        weight=1 # Espessura da linha
+    ).add_to(m)
+
+    folium.Marker(
+        location=[row['Latitude'], row['Longitude']],
+        popup=f"<b>{row['Escola']}</b><br>{row['Endereço']}",
+        tooltip=row['Escola'],
+        #icon=folium.Icon(color="blue", icon="graduation-cap", prefix="fa")
+        icon=folium.Icon(color=cor_marker, icon="university", prefix="fa")
+    ).add_to(m)
+
+st_folium(m, width=1500, height=700, use_container_width=True)
+
+with st.expander("Ver base de dados completa"):
+    st.write(df_completo)
+
+with st.expander("Ver base de dados limpos"):
+    st.write(df_escola)
+
+with st.expander("Ver Latitude e Longitude"):
+    st.write(df_escola[['Escola','Latitude', 'Longitude']])
