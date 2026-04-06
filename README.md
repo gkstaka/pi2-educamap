@@ -54,6 +54,8 @@ Para a geolocalização, estamos sondando usar o StreamLit por suas bibliotecas 
 
 A ser definido como usar banco de dados - [Container Docker citado como uma das opções]
 
+Para rodar os arquivos testes, utilize o comando `streamlit run `path_to_file/nome_arquivo.py`
+
 ## 04 - Links úteis
 Instituto de Estudos e Pesquisas Educacionais - [INEP](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/inep-data)
  
