@@ -4,6 +4,8 @@ import streamlit as st
 from folium.plugins import HeatMap
 from streamlit_folium import st_folium
 
+HEAT_CAPACITY_MULTIPLIER = 6
+
 
 def render_heatmap_pins_tab(
     heatmap_df: pd.DataFrame,
@@ -20,7 +22,7 @@ def render_heatmap_pins_tab(
         return
 
     heat_local = heatmap_df.copy()
-    heat_local["capacity_heat"] = heat_local["capacity_weight"] * 3
+    heat_local["capacity_heat"] = heat_local["capacity_weight"] * HEAT_CAPACITY_MULTIPLIER
     heat_data = heat_local[["Latitude", "Longitude", "capacity_heat"]].values.tolist()
 
     heat_pin_map = folium.Map(location=[center_lat, center_lon], zoom_start=11, tiles="OpenStreetMap", control_scale=True)

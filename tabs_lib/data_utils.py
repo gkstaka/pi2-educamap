@@ -5,7 +5,7 @@ import pandas as pd
 
 
 def extract_capacity_weight(value: object) -> float | None:
-    """Extract the maximum numeric value from enrollment-capacity text."""
+    """Extract a representative enrollment value from the school size text."""
     if pd.isna(value):
         return None
 
@@ -13,11 +13,37 @@ def extract_capacity_weight(value: object) -> float | None:
     if not text:
         return None
 
-    numbers = [int(n) for n in re.findall(r"\d+", text)]
+    numbers = [float(n) for n in re.findall(r"\d+", text)]
     if not numbers:
         return None
 
+    lowered = text.lower()
+
+    if len(numbers) >= 2 and "entre" in lowered:
+        return sum(numbers[:2]) / 2
+
+    if "até" in lowered or "ate" in lowered:
+        return numbers[0] / 2
+
+    if "mais de" in lowered:
+        return numbers[0] + max(250.0, numbers[0] * 0.25)
+
     return float(max(numbers))
+
+
+def calculate_coverage_radius_meters(capacity_weight: float, location_value: object | None = None) -> float:
+    """Estimate a coverage radius in meters from enrollment weight and school location."""
+    location_text = "" if location_value is None or pd.isna(location_value) else str(location_value).strip().lower()
+    is_rural = location_text == "rural"
+
+    if is_rural:
+        base_radius = 650.0
+        weight_multiplier = 3.5
+    else:
+        base_radius = 250.0
+        weight_multiplier = 2.2
+
+    return base_radius + max(float(capacity_weight), 0.0) * weight_multiplier
 
 
 def resolve_csv_path(base_dir: Path) -> Path:
