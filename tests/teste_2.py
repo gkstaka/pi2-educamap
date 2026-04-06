@@ -50,10 +50,6 @@ template = """
 {% endmacro %}
 """
 
-
-
-
-
 st.title("EducaMap - Visualização de Escolas")
 
 @st.cache_data # Cache para não ler o arquivo toda hora que interagir com o mapa
@@ -63,7 +59,7 @@ def load_data():
     for col in ['Latitude', 'Longitude']:
         df[col] = pd.to_numeric(df[col].astype(str).str.replace(',', '.'), errors='coerce')
     
-    df_clean = df.dropna(subset=['Latitude', 'Longitude'])
+    df_clean = df.dropna(subset=['Latitude', 'Longitude'st.sidebar.button("Limpar Filtros", on_click=limpar_filtros)])
     return df, df_clean
 
 df_completo, df_escola = load_data()
