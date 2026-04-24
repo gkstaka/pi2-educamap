@@ -1,0 +1,1445 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.169778,
+          -15.74364
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Incra 08",
+        "CO_ENTIDADE": "53004981",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Brazlândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.19588,
+          -15.68821
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 01 de Brazlandia",
+        "CO_ENTIDADE": "53005015",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Brazlândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.190333,
+          -15.534196
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 04 de Brazlandia",
+        "CO_ENTIDADE": "53005171",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Brazlândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.103069,
+          -15.675254
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Irma Maria Regina Velanes Regis",
+        "CO_ENTIDADE": "53005210",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Brazlândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.197001,
+          -15.666294
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 02 de Brazlandia",
+        "CO_ENTIDADE": "53012720",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Brazlândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.129382,
+          -15.79374
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 14 de Ceilandia",
+        "CO_ENTIDADE": "53007360",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Ceilândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.138195,
+          -15.798683
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 15 de Ceilandia",
+        "CO_ENTIDADE": "53007387",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Ceilândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.130029,
+          -15.809966
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 12 de Ceilandia",
+        "CO_ENTIDADE": "53007425",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Ceilândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.109051,
+          -15.807496
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 02 de Ceilandia",
+        "CO_ENTIDADE": "53007492",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Ceilândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.0987,
+          -15.826407
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 03 de Ceilandia",
+        "CO_ENTIDADE": "53007506",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Ceilândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.107882,
+          -15.831153
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 04 de Ceilandia",
+        "CO_ENTIDADE": "53007514",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Ceilândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.115589,
+          -15.844511
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 06 de Ceilandia",
+        "CO_ENTIDADE": "53007530",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Ceilândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.118312,
+          -15.812219
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 07 de Ceilandia",
+        "CO_ENTIDADE": "53007549",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Ceilândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.124294,
+          -15.791744
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 09 de Ceilandia",
+        "CO_ENTIDADE": "53007557",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Ceilândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.140387,
+          -15.800991
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 10 de Ceilandia",
+        "CO_ENTIDADE": "53007565",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Ceilândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.125343,
+          -15.8229
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 11 de Ceilandia",
+        "CO_ENTIDADE": "53007921",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Ceilândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.19374,
+          -15.78412
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Incra 09",
+        "CO_ENTIDADE": "53008146",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Ceilândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.14329,
+          -15.80388
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 16 de Ceilandia",
+        "CO_ENTIDADE": "53012100",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Ceilândia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.078316,
+          -16.023165
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 08 do Gama",
+        "CO_ENTIDADE": "53002482",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Gama"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.054312,
+          -16.018824
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 01 do Gama",
+        "CO_ENTIDADE": "53002580",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Gama"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.071089,
+          -16.015342
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 02 do Gama",
+        "CO_ENTIDADE": "53002598",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Gama"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.063715,
+          -16.036723
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 03 do Gama",
+        "CO_ENTIDADE": "53002601",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Gama"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.05057,
+          -16.007341
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 06 do Gama",
+        "CO_ENTIDADE": "53002610",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Gama"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.257081,
+          -16.041938
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Engenho das Lajes",
+        "CO_ENTIDADE": "53003047",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Gama"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.099208,
+          -15.964013
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Casa Grande",
+        "CO_ENTIDADE": "53009380",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Gama"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.074952,
+          -16.010509
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cemi Ep do Gama",
+        "CO_ENTIDADE": "53014812",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Gama"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.968539,
+          -15.84311
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 01 do Guara",
+        "CO_ENTIDADE": "53008456",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Guará"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.980923,
+          -15.818296
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 01 do Guara",
+        "CO_ENTIDADE": "53008464",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Guará"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.975583,
+          -15.838862
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 03 do Guara",
+        "CO_ENTIDADE": "53008472",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Guará"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.97507,
+          -15.821125
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 04 do Guara",
+        "CO_ENTIDADE": "53008480",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Guará"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.99709,
+          -15.78305
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 01 da Estrutural",
+        "CO_ENTIDADE": "53048008",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Guará"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.014953,
+          -15.947491
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Agrourbano Ipe Riacho Fundo",
+        "CO_ENTIDADE": "53006968",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Núcleo Bandeirante"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.014307,
+          -15.888141
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 01 do Riacho Fundo",
+        "CO_ENTIDADE": "53006984",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Núcleo Bandeirante"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.969044,
+          -15.872396
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem Urso Branco",
+        "CO_ENTIDADE": "53007077",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Núcleo Bandeirante"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.946204,
+          -15.853104
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem Julia Kubitschek",
+        "CO_ENTIDADE": "53051009",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Núcleo Bandeirante"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.032487,
+          -15.948843
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 01 do Riacho Fundo Ii",
+        "CO_ENTIDADE": "53068092",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Núcleo Bandeirante"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.55719,
+          -16.009773
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced do Pad-df",
+        "CO_ENTIDADE": "53006720",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Paranoá"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.779708,
+          -15.782896
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 01 do Paranoa",
+        "CO_ENTIDADE": "53006739",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Paranoá"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.783141,
+          -15.762664
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Darcy Ribeiro",
+        "CO_ENTIDADE": "53011520",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Paranoá"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.782691,
+          -15.768572
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 01 do Itapoa",
+        "CO_ENTIDADE": "53016378",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Paranoá"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.650132,
+          -15.600974
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Pipiripau Ii",
+        "CO_ENTIDADE": "53005988",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Planaltina"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.522233,
+          -15.633778
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Taquara",
+        "CO_ENTIDADE": "53006046",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Planaltina"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.570498,
+          -15.821029
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Varzeas",
+        "CO_ENTIDADE": "53006054",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Planaltina"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.651769,
+          -15.619731
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 01 de Planaltina",
+        "CO_ENTIDADE": "53006062",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Planaltina"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.653629,
+          -15.62173
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 02 de Planaltina",
+        "CO_ENTIDADE": "53006070",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Planaltina"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.650017,
+          -15.603204
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 03 de Planaltina",
+        "CO_ENTIDADE": "53006283",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Planaltina"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.630395,
+          -15.526878
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Osorio Bacchin",
+        "CO_ENTIDADE": "53006496",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Planaltina"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.659758,
+          -15.630407
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Stella dos Cherubins Guimaraes Trois",
+        "CO_ENTIDADE": "53013840",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Planaltina"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.682861,
+          -15.59898
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Pompilio Marques de Souza",
+        "CO_ENTIDADE": "53014308",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Planaltina"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.65665,
+          -15.679885
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Vale do Amanhecer",
+        "CO_ENTIDADE": "53014316",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Planaltina"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.629166,
+          -15.640361
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Dona America Guimaraes",
+        "CO_ENTIDADE": "53068068",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Planaltina"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.878326,
+          -15.755938
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem Paulo Freire",
+        "CO_ENTIDADE": "53000986",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Plano Piloto"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.875096,
+          -15.766506
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem Asa Norte - Cean",
+        "CO_ENTIDADE": "53001010",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Plano Piloto"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.909418,
+          -15.808629
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem Elefante Branco",
+        "CO_ENTIDADE": "53001036",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Plano Piloto"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.894654,
+          -15.769269
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Gisno",
+        "CO_ENTIDADE": "53001044",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Plano Piloto"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.906551,
+          -15.831234
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem Setor Leste",
+        "CO_ENTIDADE": "53001206",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Plano Piloto"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.919762,
+          -15.815915
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem Setor Oeste",
+        "CO_ENTIDADE": "53001214",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Plano Piloto"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.938516,
+          -15.783254
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Centro de Ensino Medio Integrado do Cruzeiro",
+        "CO_ENTIDADE": "53008790",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Plano Piloto"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.938144,
+          -15.795792
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 02 do Cruzeiro",
+        "CO_ENTIDADE": "53008804",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Plano Piloto"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.87641,
+          -15.839167
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced do Lago",
+        "CO_ENTIDADE": "53009479",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Plano Piloto"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.878942,
+          -15.717947
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced do Lago Norte",
+        "CO_ENTIDADE": "53012356",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Plano Piloto"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.242001,
+          -15.940488
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Myriam Ervilha",
+        "CO_ENTIDADE": "53008979",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Recanto das Emas"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.071156,
+          -15.900669
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 104 do Recanto das Emas",
+        "CO_ENTIDADE": "53011066",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Recanto das Emas"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.101348,
+          -15.923411
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 308 do Recanto das Emas",
+        "CO_ENTIDADE": "53012119",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Recanto das Emas"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.098562,
+          -15.912497
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 111 do Recanto das Emas",
+        "CO_ENTIDADE": "53012194",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Recanto das Emas"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.058154,
+          -15.920429
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 804 do Recanto das Emas",
+        "CO_ENTIDADE": "53019407",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Recanto das Emas"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.079246,
+          -15.879296
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 304 de Samambaia",
+        "CO_ENTIDADE": "53009029",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Samambaia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.12254,
+          -15.879117
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 619 de Samambaia",
+        "CO_ENTIDADE": "53010019",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Samambaia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.072355,
+          -15.859212
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 414 de Samambaia",
+        "CO_ENTIDADE": "53011996",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Samambaia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.122919,
+          -15.89369
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 123 de Samambaia",
+        "CO_ENTIDADE": "53012097",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Samambaia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.993146,
+          -16.01624
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 416 de Santa Maria",
+        "CO_ENTIDADE": "53010000",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Santa Maria"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.991103,
+          -16.011557
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 417 de Santa Maria",
+        "CO_ENTIDADE": "53012607",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Santa Maria"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.026566,
+          -16.034426
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 404 de Santa Maria",
+        "CO_ENTIDADE": "53012623",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Santa Maria"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.016349,
+          -16.023661
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 310 de Santa Maria",
+        "CO_ENTIDADE": "53068181",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Santa Maria"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.779378,
+          -15.901671
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 01 de Sao Sebastiao",
+        "CO_ENTIDADE": "53011031",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "São Sebastião"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.76295,
+          -15.914725
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Sao Francisco",
+        "CO_ENTIDADE": "53019806",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "São Sebastião"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.812131,
+          -15.649381
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 03 de Sobradinho",
+        "CO_ENTIDADE": "53005341",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Sobradinho"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.880935,
+          -15.590673
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Centro Educacional Fercal",
+        "CO_ENTIDADE": "53005392",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Sobradinho"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.798768,
+          -15.653723
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 01 de Sobradinho",
+        "CO_ENTIDADE": "53005465",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Sobradinho"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.786368,
+          -15.647943
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 02 de Sobradinho",
+        "CO_ENTIDADE": "53005473",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Sobradinho"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.95066,
+          -15.617859
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced Prof Carlos Ramos Mota",
+        "CO_ENTIDADE": "53005740",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Sobradinho"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.825978,
+          -15.646462
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 04 de Sobradinho",
+        "CO_ENTIDADE": "53012542",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Sobradinho"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.039655,
+          -15.859857
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 03 de Taguatinga",
+        "CO_ENTIDADE": "53003586",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Taguatinga"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.057532,
+          -15.79555
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 04 de Taguatinga",
+        "CO_ENTIDADE": "53003594",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Taguatinga"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.087696,
+          -15.814896
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem 05 de Taguatinga",
+        "CO_ENTIDADE": "53003608",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Taguatinga"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.078606,
+          -15.83147
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Ced 06 de Taguatinga",
+        "CO_ENTIDADE": "53003616",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Taguatinga"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.100292,
+          -15.804436
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Centro de Ensino Medio Integrado a Educacao Profissional de Taguatinga",
+        "CO_ENTIDADE": "53003624",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Taguatinga"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.054,
+          -15.835904
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem Ave Branca",
+        "CO_ENTIDADE": "53003632",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Taguatinga"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.065861,
+          -15.81951
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Cem Taguatinga Norte",
+        "CO_ENTIDADE": "53003683",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Taguatinga"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.058572,
+          -15.83256
+        ]
+      },
+      "properties": {
+        "NO_ENTIDADE": "Centro de Ensino Medio Eit",
+        "CO_ENTIDADE": "53003691",
+        "TIPO_ENSINO": "Ensino Médio",
+        "NO_ORGAO_REGIONAL": "Taguatinga"
+      }
+    }
+  ]
+}
