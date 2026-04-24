@@ -49,11 +49,7 @@ def calculate_coverage_radius_meters(capacity_weight: float, location_value: obj
 def resolve_csv_path(base_dir: Path) -> Path:
     """Find the schools CSV path from common project locations."""
     candidates = [
-        #base_dir / "data" / "raw" / "Catalogo_Escola" / "Analise-Tabela_da_lista_das_escolas_Detalhado.csv",
         base_dir / "data" / "raw" / "Catalogo_Escola" / "Analise-Tabela_da_lista_das_escolas_Detalhado.csv",
-        base_dir / "EducaMap" / "data" / "raw" / "Catalogo_Escola" / "Analise-Tabela_da_lista_das_escolas_Detalhado.csv",
-        #base_dir / "tests" / "Analise-Tabela_da_lista_das_escolas-Detalhado.csv",
-        #base_dir / "Analise-Tabela_da_lista_das_escolas-Detalhado.csv",
     ]
 
     for candidate in candidates:

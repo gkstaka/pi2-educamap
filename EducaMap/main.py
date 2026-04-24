@@ -3,7 +3,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from modules import (
+from app.modules import (
     load_school_data,
     render_heatmap_pins_tab,
     render_heatmap_tab,
