@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_educamap
+    restart: always
+    environment:
+      POSTGRES_USER: admin_educa
+      POSTGRES_PASSWORD: senha_projeto
+      POSTGRES_DB: educamap_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    container_name: streamlit_educamap
+    ports:
+      - "8501:8501"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://admin_educa:senha_projeto@db:5432/educamap_db
+    volumes:
+      - .:/EducaMap
+    stdin_open: true
+    tty: true
+
+volumes:
+  postgres_data:

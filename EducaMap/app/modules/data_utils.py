@@ -1,23 +1,23 @@
 from pathlib import Path
 import re
-
 import pandas as pd
-
+from sqlalchemy import text
+from app.utils.model import engine
 
 def extract_capacity_weight(value: object) -> float | None:
-    """Extract a representative enrollment value from the school size text."""
+    """Extrai um valor representativo de matrículas do texto de porte da escola."""
     if pd.isna(value):
         return None
 
-    text = str(value).strip()
-    if not text:
+    text_str = str(value).strip()
+    if not text_str:
         return None
 
-    numbers = [float(n) for n in re.findall(r"\d+", text)]
+    numbers = [float(n) for n in re.findall(r"\d+", text_str)]
     if not numbers:
         return None
 
-    lowered = text.lower()
+    lowered = text_str.lower()
 
     if len(numbers) >= 2 and "entre" in lowered:
         return sum(numbers[:2]) / 2
@@ -30,39 +30,9 @@ def extract_capacity_weight(value: object) -> float | None:
 
     return float(max(numbers))
 
-
-def calculate_coverage_radius_meters(capacity_weight: float, location_value: object | None = None) -> float:
-    """Estimate a coverage radius in meters from enrollment weight and school location."""
-    location_text = "" if location_value is None or pd.isna(location_value) else str(location_value).strip().lower()
-    is_rural = location_text == "rural"
-
-    if is_rural:
-        base_radius = 650.0
-        weight_multiplier = 3.5
-    else:
-        base_radius = 250.0
-        weight_multiplier = 2.2
-
-    return base_radius + max(float(capacity_weight), 0.0) * weight_multiplier
-
-
-def resolve_csv_path(base_dir: Path) -> Path:
-    """Find the schools CSV path from common project locations."""
-    candidates = [
-        base_dir / "data" / "raw" / "Catalogo_Escola" / "Analise-Tabela_da_lista_das_escolas_Detalhado.csv",
-    ]
-
-    for candidate in candidates:
-        if candidate.exists():
-            return candidate
-
-    return candidates[0]
-
-
 @pd.api.extensions.register_dataframe_accessor("educamap")
 class _EducaMapAccessor:
-    """Simple namespace for helpers tied to the schools dataframe."""
-
+    """Namespace para auxiliares vinculados ao dataframe de escolas."""
     def __init__(self, pandas_obj: pd.DataFrame):
         self._obj = pandas_obj
 
@@ -80,11 +50,10 @@ class _EducaMapAccessor:
             df["Longitude"].astype(str).str.replace(",", ".", regex=False).str.strip(),
             errors="coerce",
         )
-
         return df.dropna(subset=["Latitude", "Longitude"]).copy()
 
-
 def load_school_data(csv_file: Path) -> pd.DataFrame:
+    """Carrega e limpa os dados do CSV."""
     df = pd.read_csv(csv_file)
     df = df.educamap.with_coordinates()
 
@@ -95,10 +64,78 @@ def load_school_data(csv_file: Path) -> pd.DataFrame:
 
     return df
 
+def resolve_csv_path(project_root: Path) -> Path:
+    """Localiza o arquivo CSV no projeto dentro do ambiente Docker."""
+    # Como definimos WORKDIR /EducaMap no Dockerfile, o arquivo estará na raiz
+    candidate = Path("/EducaMap/listaEscolasDFInep.csv")
+    
+    if candidate.exists():
+        return candidate
+    
+    # Fallback para execução local fora do Docker
+    return project_root / "listaEscolasDFInep.csv"
+
+# def resolve_csv_path(project_root: Path) -> Path:
+#     """Localiza o arquivo CSV no projeto."""
+#     candidates = [
+#         project_root / "listaEscolasDFInep.csv",
+#     ]
+#     for candidate in candidates:
+#         if candidate.exists():
+#             return candidate
+#     return candidates[0]
 
 def resolve_municipio_column(df: pd.DataFrame) -> str | None:
-    if "Municipio" in df.columns:
-        return "Municipio"
-    if "Município" in df.columns:
-        return "Município"
+    if "Municipio" in df.columns: return "Municipio"
+    if "Município" in df.columns: return "Município"
     return None
+
+# --- FUNÇÕES DE INTERAÇÃO COM O BANCO DE DADOS ---
+
+def load_inicial_data():
+    """Lê o CSV e popula o banco de dados PostgreSQL."""
+    try:
+        project_root = Path(__file__).resolve().parent.parent
+        csv_path = resolve_csv_path(project_root)
+        
+        print(f"Lendo dados de: {csv_path}")
+        df = load_school_data(csv_path)
+        
+        # Mapeamento para o banco de dados
+        df_db = df[[
+            'Código INEP', 'Escola', 'Latitude', 'Longitude', 
+            'Dependência Administrativa', 'Localização', 'Porte da Escola', 'capacity_weight'
+        ]].rename(columns={
+            'Código INEP': 'id_escola',
+            'Escola': 'nome_escola',
+            'Latitude': 'latitude',
+            'Longitude': 'longitude',
+            'Dependência Administrativa': 'tipo_rede',
+            'Localização': 'localizacao',
+            'Porte da Escola': 'porte_escola'
+        })
+        
+        df_db.to_sql('escolas', engine, if_exists='replace', index=False)
+        print("Banco de dados populado com sucesso!")
+    except Exception as e:
+        print(f"Erro ao popular banco: {e}")
+
+def load_data_from_postgres() -> pd.DataFrame:
+    """Lê os dados do banco e retorna no formato esperado pelo main.py."""
+    query = "SELECT * FROM escolas"
+    df = pd.read_sql(query, engine)
+    
+    # Mapeamento reverso para manter compatibilidade com o frontend
+    df = df.rename(columns={
+        'id_escola': 'Código INEP',
+        'nome_escola': 'Escola',
+        'latitude': 'Latitude',
+        'longitude': 'Longitude',
+        'tipo_rede': 'Dependência Administrativa',
+        'localizacao': 'Localização',
+        'porte_escola': 'Porte da Escola'
+    })
+    return df
+
+if __name__ == "__main__":
+    load_inicial_data()
