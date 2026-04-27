@@ -1,0 +1,96 @@
+"""
+Página principal do Sistema.
+Apresentação do EducaMap e tutorial de navegação.
+"""
+
+import streamlit as st
+from app.modules.data_utils import load_data_from_postgres
+
+def main() -> None:
+    # Configuração da página e estado inicial
+    st.set_page_config(layout="wide", page_title="EducaMap - Apresentação")
+
+    # Injeção de CSS para personalizar a apresentação
+    st.markdown("""
+        <style>
+        .main-header {
+            background-color: #1F5D8D;
+            padding: 30px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .info-box {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            color: black;
+            border-left: 5px solid #1F5D8D;
+            margin-top: 15px;
+        }
+        .ods-tag {
+            background-color: #5fd819;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    # 1. Cabeçalho Principal (HTML)
+    st.markdown("""
+        <div class="main-header">
+            <h1>EducaMap</h1>
+            <p>Inteligência Geográfica Aplicada ao Planejamento Educacional do Distrito Federal.</p>
+        </div>
+    """, unsafe_allow_html=True)
+
+    # Tentativa de carregar dados para validar a conexão e mostrar estatísticas rápidas
+    try:
+        df = load_data_from_postgres()
+        data_loaded = True
+    except Exception as exc:
+        st.error(f"Erro ao conectar com o banco de dados: {exc}")
+        data_loaded = False
+
+    # 2. Seção de Conteúdo: Apresentação do Projeto
+    col1, col2 = st.columns([2, 1])
+
+    with col1:
+        st.markdown("""
+            <div class="info-box">
+                <h3>Sobre o Projeto</h3>
+                <p>O <b>EducaMap</b> é uma ferramenta desenvolvida para identificar "desertos educacionais" no território do Distrito Federal. 
+                Cruzando dados georreferenciados do INEP, a aplicação permite visualizar onde a oferta de infraestrutura escolar precisa de atenção.</p>
+                <p>Nossa solução utiliza mapas de calor e cálculos de raio de abrangência para apoiar gestores públicos e pesquisadores urbanos.</p>
+            </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown('<span class="ods-tag">Conexão ODS 4</span>', unsafe_allow_html=True)
+        st.write("")
+        st.write("**Meta 4.a:** Construir e melhorar instalações físicas para educação que sejam apropriadas para crianças e inclusivas.")
+        
+        if data_loaded:
+            st.metric("Escolas Mapeadas", len(df))
+
+    # 3. Instruções de Navegação
+    st.markdown("---")
+    st.subheader("Como navegar")
+    st.write("Utilize a barra lateral à esquerda para acessar as funcionalidades:")
+    
+    st.markdown("""
+    - **Mapa de Raios**: Visualize a área de atendimento de cada escola.
+    - **Mapa de Calor**: Identifique a densidade de matrículas por região.
+    - **Tabelas e Gráficos**: Explore os dados analíticos de forma tabular.
+    - **Créditos**: Conheça a equipe de desenvolvimento.
+    """)
+
+    st.sidebar.success("Selecione uma página acima.")
+
+if __name__ == "__main__":
+    main()

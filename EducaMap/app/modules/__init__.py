@@ -1,3 +1,5 @@
+# NOTE: Conexão com os módulos do sistema.
+
 from app.modules.data_utils import (
     load_school_data, 
     resolve_csv_path, 

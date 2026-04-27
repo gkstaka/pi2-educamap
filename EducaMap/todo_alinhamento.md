@@ -34,3 +34,20 @@ Criar página de apresentação inicial para o Usuário ficar encantado e ter vo
 
 ## Relatórios
 Implementar funcionalidade de elaboração de relatório a partir dos dados contidos no banco de dados. (ver se dá pra fazer até o fim do semestre).
+
+## Justificativa Urbanística para cálculo dos raios.
+Para estimar os raios de influência ou de atendimento de uma escola, geralmente consideramos a distância de caminhada 
+(walkability) ou a densidade demográfica da região. No contexto urbano brasileiro, podemos usar referências do urbanismo 
+e de políticas públicas de educação.
+
+Proposta de Estimativa de Raios
+
+Porte da Escola	Raio Estimado	Justificativa Urbanística
+
+- PEQUENO	300m a 500m	Equivale a uma caminhada de 5 a 7 minutos. Ideal para escolas de educação infantil ou bairros muito densos.
+
+- MÉDIO	800m a 1000m	Cerca de 10 a 12 minutos de caminhada. É o padrão comum para o atendimento de Ensino Fundamental I em áreas urbanas.
+
+- GRANDE	1500m a 2000m	Abrange um bairro inteiro ou áreas adjacentes. Comum para Ensino Médio ou escolas com grande oferta de vagas.
+
+- ESPECIAL	3000m+	Escolas de referência técnica ou integral que atraem alunos de regiões mais distantes (uso de transporte público/escolar).
