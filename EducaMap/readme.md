@@ -1,6 +1,5 @@
 # Estrutura de pastas
-
----
+```
 EducaMap/
 ├── app/                      # Código fonte da aplicação
 │   ├── main.py               # Script principal (Streamlit + Folium)
@@ -16,4 +15,4 @@ EducaMap/
 ├── .gitignore                # Arquivos para o Git ignorar (venv, .env, __pycache__)
 ├── Dockerfile                # Receita da imagem do container Python
 └── docker-compose.yml        # Orquestrador dos containers (App + DB)
----
+```
