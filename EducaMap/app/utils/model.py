@@ -19,7 +19,22 @@ class Escola(Base):
     tipo_rede = Column(String(50))
     localizacao = Column(String(50))
     porte_escola = Column(String(100))
-    capacity_weight = Column(Float) # FIX: ver a localização deste item.
+    # capacity_weight = Column(Float) # FIX: ver a localização deste item.
+
+    resultados = relationship("Resultado", back_populates="escolas")
+
+
+class Resultado(Base):
+    __tablename__ = 'resultados'
+    id_resultado = Column(Integer, primary_key=True, autoincrement=True)
+
+    #Chave estrangeira relacionada à escolas
+    id_escola = Column(Integer, ForeignKey('escolas.id_escola'), nullable=False)
+
+    raio_calculado = Column(Float)
+    capacidade_matricula = Column(Float)
+
+    escola = relationship("Escola", back_populates="resultados")
 
 
 # A string de conexão usará as variáveis que definiremos no Docker

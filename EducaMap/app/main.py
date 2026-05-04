@@ -1,18 +1,39 @@
 """
-Página principal do Sistema.
-Apresentação do EducaMap e tutorial de navegação.
+Página principal do Sistema EducaMap.
+Apresentação do projeto e portal de navegação padronizado.
 """
 
 import streamlit as st
 from app.modules.data_utils import load_data_from_postgres
 
 def main() -> None:
-    # Configuração da página e estado inicial
-    st.set_page_config(layout="wide", page_title="EducaMap - Apresentação")
+    # 1. Configuração da Página e Estado Inicial
+    st.set_page_config(
+        layout="wide", 
+        page_title="EducaMap - Apresentação",
+        initial_sidebar_state="expanded"
+    )
 
-    # Injeção de CSS para personalizar a apresentação
+    # 2. Injeção de CSS para Padronização de Layout
     st.markdown("""
         <style>
+        /* Remove o botão hambúrguer (impede fechar a barra lateral) */
+        [data-testid="collapsedControl"] {
+            display: none !important;
+        }
+        
+        /* Remove o cabeçalho e rodapé nativos */
+        header {visibility: hidden;}
+        footer {visibility: hidden;}
+
+        /* Estilização da Barra Lateral */
+        [data-testid="stSidebar"] {
+            min-width: 280px !important;
+            max-width: 280px !important;
+            /* background-color: #f8f9fa; */
+        }
+
+        /* Estilização dos elementos de apresentação */
         .main-header {
             background-color: #1F5D8D;
             padding: 30px;
@@ -22,11 +43,12 @@ def main() -> None:
             margin-bottom: 20px;
         }
         .info-box {
-            background-color: #f8f9fa;
+            background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
-            color: black;
+            color: #333;
             border-left: 5px solid #1F5D8D;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             margin-top: 15px;
         }
         .ods-tag {
@@ -40,7 +62,33 @@ def main() -> None:
         </style>
     """, unsafe_allow_html=True)
 
-    # 1. Cabeçalho Principal (HTML)
+    # 3. Carregamento de Dados para validação
+    try:
+        df = load_data_from_postgres()
+        total_escolas = len(df)
+    except Exception as exc:
+        st.sidebar.error(f"Erro de conexão: {exc}")
+        total_escolas = 0
+
+    # --- BARRA LATERAL PADRONIZADA ---
+    with st.sidebar:
+        # Título em azul marinho
+        st.markdown("<h1 style='color: #1F5D8D; margin-bottom: 0;'>EducaMap</h1>", unsafe_allow_html=True)
+        # Nome da página atual
+        st.markdown("<p style='color: #666; font-size: 1.1rem; font-weight: bold;'>Apresentação</p>", unsafe_allow_html=True)
+        
+        st.divider() # Barra de separação
+        
+        # Filtros (Não aplicáveis na home, mas mantendo o espaço conforme padrão)
+        st.info("Selecione uma ferramenta no menu acima para aplicar filtros.")
+
+        st.divider() # Barra de separação
+        
+        # Instruções Gerais
+        st.markdown("**Instruções**")
+        st.caption("Bem-vindo ao EducaMap. Utilize os módulos ao lado para analisar a infraestrutura escolar do DF.")
+
+    # --- CONTEÚDO PRINCIPAL ---
     st.markdown("""
         <div class="main-header">
             <h1>EducaMap</h1>
@@ -48,24 +96,14 @@ def main() -> None:
         </div>
     """, unsafe_allow_html=True)
 
-    # Tentativa de carregar dados para validar a conexão e mostrar estatísticas rápidas
-    try:
-        df = load_data_from_postgres()
-        data_loaded = True
-    except Exception as exc:
-        st.error(f"Erro ao conectar com o banco de dados: {exc}")
-        data_loaded = False
-
-    # 2. Seção de Conteúdo: Apresentação do Projeto
     col1, col2 = st.columns([2, 1])
 
     with col1:
         st.markdown("""
             <div class="info-box">
                 <h3>Sobre o Projeto</h3>
-                <p>O <b>EducaMap</b> é uma ferramenta desenvolvida para identificar "desertos educacionais" no território do Distrito Federal. 
-                Cruzando dados georreferenciados do INEP, a aplicação permite visualizar onde a oferta de infraestrutura escolar precisa de atenção.</p>
-                <p>Nossa solução utiliza mapas de calor e cálculos de raio de abrangência para apoiar gestores públicos e pesquisadores urbanos.</p>
+                <p>O <b>EducaMap</b> identifica "desertos educacionais" no território do Distrito Federal, cruzando dados georreferenciados do INEP para apoiar gestores públicos.</p>
+                <p>Nossa solução utiliza mapas de calor e cálculos de raio de abrangência para visualizar onde a oferta escolar precisa de atenção prioritária.</p>
             </div>
         """, unsafe_allow_html=True)
 
@@ -73,24 +111,24 @@ def main() -> None:
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown('<span class="ods-tag">Conexão ODS 4</span>', unsafe_allow_html=True)
         st.write("")
-        st.write("**Meta 4.a:** Construir e melhorar instalações físicas para educação que sejam apropriadas para crianças e inclusivas.")
+        st.write("**Meta 4.a:** Melhorar instalações físicas para educação que sejam apropriadas para crianças e inclusivas.")
         
-        if data_loaded:
-            st.metric("Escolas Mapeadas", len(df))
+        if total_escolas > 0:
+            st.metric("Escolas Georreferenciadas", total_escolas)
 
-    # 3. Instruções de Navegação
-    st.markdown("---")
-    st.subheader("Como navegar")
-    st.write("Utilize a barra lateral à esquerda para acessar as funcionalidades:")
+    st.divider()
+    st.subheader("Funcionalidades Principais")
     
-    st.markdown("""
-    - **Mapa de Raios**: Visualize a área de atendimento de cada escola.
-    - **Mapa de Calor**: Identifique a densidade de matrículas por região.
-    - **Tabelas e Gráficos**: Explore os dados analíticos de forma tabular.
-    - **Créditos**: Conheça a equipe de desenvolvimento.
-    """)
-
-    st.sidebar.success("Selecione uma página acima.")
+    fcol1, fcol2, fcol3 = st.columns(3)
+    with fcol1:
+        st.write("📍 **Mapa de Raios**")
+        st.caption("Visualização da área de atendimento baseada no porte da escola.")
+    with fcol2:
+        st.write("🔥 **Mapa de Calor**")
+        st.caption("Densidade de matrículas e identificação de polos de demanda.")
+    with fcol3:
+        st.write("📊 **Análise de Dados**")
+        st.caption("Gráficos interativos e tabelas detalhadas para exportação.")
 
 if __name__ == "__main__":
     main()

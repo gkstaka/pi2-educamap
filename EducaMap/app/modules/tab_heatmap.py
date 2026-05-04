@@ -13,7 +13,7 @@ def render_heatmap_tab(
     blur: int,
     min_opacity: float,
 ) -> None:
-    st.subheader("Heatmap ponderado por matriculas")
+    # st.subheader("Heatmap ponderado por matriculas")
 
     if heatmap_df.empty:
         st.info("Sem dados de matriculas para o heatmap apos aplicar os filtros.")
@@ -38,11 +38,19 @@ def render_heatmap_tab(
             1.00: "#d7191c",  # warm red
         },
     ).add_to(heat_map)
-
+    
+    # Simular 100% da viewport.
     st_folium(
         heat_map,
-        key="heatmap_tab_map",
-        height=650,
-        use_container_width=True,
-        returned_objects=[],
+        width="100%",
+        height=950,
+        returned_objects=[]
     )
+
+    # st_folium(
+    #     heat_map,
+    #     key="heatmap_tab_map",
+    #     height=650,
+    #     use_container_width=True,
+    #     returned_objects=[],
+    # )

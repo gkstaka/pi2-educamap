@@ -101,7 +101,7 @@ def load_inicial_data():
         df = load_school_data(csv_path)
         
         # Mapeamento para o banco de dados
-        df_db = df[[
+        df_escolas = df[[
                 'Código INEP', 'Escola', 'Endereço', 'Latitude', 'Longitude', 
             'Dependência Administrativa', 'Localização', 'Porte da Escola', 'capacity_weight'
         ]].rename(columns={
@@ -115,7 +115,18 @@ def load_inicial_data():
             'Porte da Escola': 'porte_escola'
         })
         
-        df_db.to_sql('escolas', engine, if_exists='replace', index=False)
+        df_escolas.to_sql('escolas', engine, if_exists='replace', index=False)
+
+        resultados_data = []
+        for _, row in df.iterrows():
+            resultados_data.append({
+                'id_escola': row['Código INEP'],
+                'raio_calculado': get_calculated_radius(row['Porte da Escola']),
+                'capacidade_matricula': extract_capacity_weight(row['Porte da Escola'])
+            })
+
+        df_resultados = pd.DataFrame(resultados_data)
+        df_resultados.to_sql('resultados', engine, if_exists='replace', index=False)
         print("Banco de dados populado com sucesso!")
     except Exception as e:
         print(f"Erro ao popular banco: {e}")
