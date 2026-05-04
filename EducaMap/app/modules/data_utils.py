@@ -7,6 +7,59 @@ from sqlalchemy import text
 from app.utils.model import engine
 
 # TODO: Rever essa metodologia se baseando no "workability"
+def get_calculated_radius(porte):
+    porte = str(porte).upper()
+    if "PEQUENO" in porte: return 500
+    elif "MÉDIO" in porte or "MEDIO" in porte: return 1000
+    elif "GRANDE" in porte: return 2000
+    else: return 3000
+
+
+def extract_maximun_capacity_weight(value: object) -> float:
+    """
+    Extrai a capacidade baseada em faixas fixas de matrícula:
+    - Até 50 -> 50
+    - 51 a 200 -> 200
+    - 201 a 500 -> 500
+    - 501 a 1000 -> 1000
+    - Mais de 1000 -> 1001
+    - Sem matrícula -> 0
+    """
+    if pd.isna(value):
+        return 0.0
+
+    text_str = str(value).strip().lower()
+    
+    # Caso específico para escolas sem matrícula
+    if "sem matrícula" in text_str or "sem matricula" in text_str:
+        return 0.0
+
+    # Extração de todos os números presentes na string
+    numbers = [int(n) for n in re.findall(r"\d+", text_str)]
+    
+    if not numbers:
+        return 0.0
+
+    # Lógica baseada nos limites superiores das faixas informadas
+    if "mais de 1000" in text_str:
+        return 1001.0
+    
+    if "até 50" in text_str or 50 in numbers:
+        return 50.0
+    
+    if 200 in numbers:
+        return 200.0
+    
+    if 500 in numbers:
+        return 500.0
+    
+    if 1000 in numbers:
+        return 1000.0
+
+    # Fallback: retorna o maior número encontrado ou 0
+    return float(max(numbers)) if numbers else 0.0
+
+
 def extract_capacity_weight(value: object) -> float | None:
     #NOTE:Extrai um valor representativo de matrículas do texto de porte da escola.
     if pd.isna(value):
@@ -99,7 +152,13 @@ def load_inicial_data():
         
         print(f"Lendo dados de: {csv_path}")
         df = load_school_data(csv_path)
-        
+
+        # ---- LIMPEZA MANUAL DAS TABELAS ----
+        with engine.connect() as conn:
+            conn.execute(text("TRUNCATE TABLE resultados CASCADE;"))
+            conn.execute(text("TRUNCATE TABLE escolas CASCADE;"))
+            conn.commit()
+
         # Mapeamento para o banco de dados
         df_escolas = df[[
                 'Código INEP', 'Escola', 'Endereço', 'Latitude', 'Longitude', 
@@ -115,7 +174,7 @@ def load_inicial_data():
             'Porte da Escola': 'porte_escola'
         })
         
-        df_escolas.to_sql('escolas', engine, if_exists='replace', index=False)
+        df_escolas.to_sql('escolas', engine, if_exists='append', index=False)
 
         resultados_data = []
         for _, row in df.iterrows():
@@ -126,7 +185,8 @@ def load_inicial_data():
             })
 
         df_resultados = pd.DataFrame(resultados_data)
-        df_resultados.to_sql('resultados', engine, if_exists='replace', index=False)
+        df_resultados.to_sql('resultados', engine, if_exists='append', index=False)
+
         print("Banco de dados populado com sucesso!")
     except Exception as e:
         print(f"Erro ao popular banco: {e}")

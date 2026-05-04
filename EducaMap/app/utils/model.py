@@ -2,8 +2,8 @@
 # TODO: Pensar o desenho do banco de dados.
 
 import os
-from sqlalchemy import create_engine, Column, Integer, String, Float
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
+from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -19,9 +19,9 @@ class Escola(Base):
     tipo_rede = Column(String(50))
     localizacao = Column(String(50))
     porte_escola = Column(String(100))
-    # capacity_weight = Column(Float) # FIX: ver a localização deste item.
+    capacity_weight = Column(Float)
 
-    resultados = relationship("Resultado", back_populates="escolas")
+    resultados = relationship("Resultado", back_populates="resultados")
 
 
 class Resultado(Base):
@@ -34,7 +34,7 @@ class Resultado(Base):
     raio_calculado = Column(Float)
     capacidade_matricula = Column(Float)
 
-    escola = relationship("Escola", back_populates="resultados")
+    escola = relationship("Escola", back_populates="escolas")
 
 
 # A string de conexão usará as variáveis que definiremos no Docker
@@ -44,3 +44,8 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 #linha adcionada para o sistema esperar o banco de dados - Ufa!!!
 Base.metadata.create_all(bind=engine)
+
+
+# TODO: fazer que os dados do campo :
+# raio_calculado --> get_calculated_radius() -> data_utils
+# capacidade_matricula --> extract_maximum_capacity_weight -> data_utils
