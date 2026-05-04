@@ -3,13 +3,14 @@ Criação de containers para manter o projeto python e o banco de dados.
 Estudo do Docker Composer para manutenção dos containers.
 
 ## Estrutura de pastas
+```
 EducaMap/
 ├── app/
 │   ├── main.py          # Seu código Streamlit/Python
 │   └── requirements.txt # Dependências (adicione 'psycopg2-binary' ou 'sqlalchemy')
 ├── Dockerfile           # Instruções para o container Python
 └── docker-compose.yml   # Orquestrador dos containers
-
+```
 ## Uso do PostGreSQL como fonte de dados.
 Tratar os dados dos arquivos fonte e utilizados no banco.
 Fazer modelagem do banco de dados conforme as tabelas definidas
