@@ -2,7 +2,7 @@
 # TODO: Pensar o desenho do banco de dados.
 
 import os
-from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey, Text
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -19,6 +19,7 @@ class Escola(Base):
     tipo_rede = Column(String(50))
     localizacao = Column(String(50))
     porte_escola = Column(String(100))
+    modalidade_ensino = Column(Text)
     capacity_weight = Column(Float)
 
     resultados = relationship("Resultado", back_populates="resultados")
@@ -31,8 +32,9 @@ class Resultado(Base):
     #Chave estrangeira relacionada à escolas
     id_escola = Column(Integer, ForeignKey('escolas.id_escola'), nullable=False)
 
-    raio_calculado = Column(Float)
+    # raio_calculado = Column(Float)
     capacidade_matricula = Column(Float)
+    # porte = Column(String(50))
 
     escola = relationship("Escola", back_populates="escolas")
 

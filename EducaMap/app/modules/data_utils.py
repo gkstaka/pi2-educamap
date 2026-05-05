@@ -15,7 +15,7 @@ def get_calculated_radius(porte):
     else: return 3000
 
 
-def extract_maximun_capacity_weight(value: object) -> float:
+def extract_maximum_capacity_weight(value: object) -> float:
     """
     Extrai a capacidade baseada em faixas fixas de matrícula:
     - Até 50 -> 50
@@ -162,7 +162,8 @@ def load_inicial_data():
         # Mapeamento para o banco de dados
         df_escolas = df[[
                 'Código INEP', 'Escola', 'Endereço', 'Latitude', 'Longitude', 
-            'Dependência Administrativa', 'Localização', 'Porte da Escola', 'capacity_weight'
+            'Dependência Administrativa', 'Localização', 'Porte da Escola', 
+            'Etapas e Modalidade de Ensino Oferecidas', 'capacity_weight'
         ]].rename(columns={
             'Código INEP': 'id_escola',
             'Escola': 'nome_escola',
@@ -171,7 +172,8 @@ def load_inicial_data():
             'Longitude': 'longitude',
             'Dependência Administrativa': 'tipo_rede',
             'Localização': 'localizacao',
-            'Porte da Escola': 'porte_escola'
+            'Porte da Escola': 'porte_escola',
+            'Etapas e Modalidade de Ensino Oferecidas': 'modalidade_ensino'
         })
         
         df_escolas.to_sql('escolas', engine, if_exists='append', index=False)
@@ -180,8 +182,8 @@ def load_inicial_data():
         for _, row in df.iterrows():
             resultados_data.append({
                 'id_escola': row['Código INEP'],
-                'raio_calculado': get_calculated_radius(row['Porte da Escola']),
-                'capacidade_matricula': extract_capacity_weight(row['Porte da Escola'])
+                # 'raio_calculado': get_calculated_radius(row['Porte da Escola']),
+                'capacidade_matricula': extract_maximum_capacity_weight(row['Porte da Escola'])
             })
 
         df_resultados = pd.DataFrame(resultados_data)
@@ -206,7 +208,8 @@ def load_data_from_postgres() -> pd.DataFrame:
         'longitude': 'Longitude',
         'tipo_rede': 'Dependência Administrativa',
         'localizacao': 'Localização',
-        'porte_escola': 'Porte da Escola'
+        'porte_escola': 'Porte da Escola',
+        'modalidade_ensino': 'Etapas e Modalidade de Ensino Oferecidas'
     })
     return df
 

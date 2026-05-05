@@ -1,0 +1,48 @@
+Leia o arquivo. 
+A estrutura de pastas do Educamap é:
+
+EducaMap/
+├── app/                      # Código fonte da aplicação
+│   ├── main.py               # Script principal (Streamlit + Folium)
+│   ├── pages/                # (Opcional) Para multi-páginas no Streamlit
+│   ├── modules/              # Lógica de Inteligência Geográfica e cálculos
+│   ├── utils/                # Conexão com DB e tratamentos de dados
+│   └── requirements.txt      # Bibliotecas (pandas, sqlalchemy, psycopg2-binary, etc.)
+├── data/                     # Arquivos fonte originais (CSVs/Planilhas)
+│   └── raw/                  # Dados brutos antes de irem para o Postgres
+├── db/                       # Scripts de inicialização do banco
+│   └── init.sql              # Criação de tabelas e carga inicial (DML/DDL)
+├── .env                      # Variáveis de ambiente (senhas e nomes do DB)
+├── .gitignore                # Arquivos para o Git ignorar (venv, .env, __pycache__)
+├── Dockerfile                # Receita da imagem do container Python
+└── docker-compose.yml        # Orquestrador dos containers (App + DB)
+
+# Conteúdo das pastas
+Será comentado sobre os arquivos constante em cada pasta.
+Pastas:
+-Educamap:
+    - docker-compose.yaml
+    - Dockerfile
+    - listaEscolasDFInep.csv
+    - requirements.py
+
+-Educamap/app:
+    - __init__.py
+    - main.py
+
+-Educamap/app/modules
+    - __init__.py
+    - data_utils.py
+    - tab_heatmap.py
+    - tab_heatmap_pins.py
+    - tab_pins_cluster.py
+    - tab_pins_plain.py
+
+-Educamap/app/pages
+    - 2_Mapa_de_Raios.py
+    - 3_Mapa_de_Calor.py
+    - 4_Graficos.py
+    - 5_Creditos.py
+
+-Educamap/app/utils
+    - model.py
