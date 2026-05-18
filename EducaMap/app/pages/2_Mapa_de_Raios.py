@@ -3,31 +3,49 @@ import folium
 import pandas as pd
 from streamlit_folium import st_folium
 from app.modules.data_utils import load_data_from_postgres
+import geopandas as gpd
+from app.utils.model import engine
+
+
+@st.cache_data(ttl=3600)
+def carregar_ra_do_banco():
+    """Busca o mapa das Regiões Administrativas direto do PostGIS."""
+    try:
+        # A coluna geométrica padronizada no seu pipeline é 'geom'
+        query = "SELECT * FROM regioes_administrativas;"
+        gdf_ra = gpd.read_postgis(query, con=engine, geom_col="geom")
+        return gdf_ra
+    except Exception as e:
+        st.error(f"Erro ao carregar mapa do PostGIS: {e}")
+        return None
+
 
 def get_urban_radius_logic(porte):
     """Retorna o raio e a justificativa baseada no porte da escola."""
     porte = str(porte).upper()
     if "ATÉ 50" in porte or "SEM MATRÍCULA" in porte:
-        return 400, "Caminhada Local"
+        return 500, "Caminhada Local"
     elif "51 E 200" in porte:
-        return 900, "Padrão Fundamental I"
+        return 800, "Padrão Fundamental I"
     elif "201 E 500" in porte:
-        return 1500, "Padrão Fundamental II"
+        return 1000, "Padrão Fundamental II"
     elif "501 E 1000" in porte:
-        return 2200, "Atendimento Regional"
+        return 2000, "Atendimento Regional"
     else:
         return 3000, "Escola de Referência"
+
 
 def render_radius_map():
     # 1. Configuração da Página
     st.set_page_config(
-        layout="wide", 
+        layout="wide",
         page_title="Mapa de Raios - EducaMap",
-        initial_sidebar_state="expanded"
+        initial_sidebar_state="expanded",
     )
-    
+
     # 2. CSS para Layout Full Screen
-    st.markdown("""
+    st.markdown(
+        """
         <style>
         [data-testid="collapsedControl"] { display: none !important; }
         header {visibility: hidden;}
@@ -35,7 +53,9 @@ def render_radius_map():
         .block-container { padding: 0rem; margin: 0rem; max-width: 100%; }
         [data-testid="stSidebar"] { min-width: 280px !important; max-width: 280px !important; }
         </style>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     # 3. Carregamento de Dados
     try:
@@ -44,10 +64,19 @@ def render_radius_map():
         st.error(f"Erro ao carregar dados: {e}")
         return
 
+    # 4. Carregamento do Shapefile das Regiões Administrativas do Banco
+    gdf_regioes = carregar_ra_do_banco()
+
     # --- BARRA LATERAL (FILTROS) ---
     with st.sidebar:
-        st.markdown("<h2 style='color: #1F5D8D; margin-bottom: 0;'>EducaMap</h2>", unsafe_allow_html=True)
-        st.markdown("<p style='color: #666; font-size: 0.8rem;'>Análise de Abrangência Escolar</p>", unsafe_allow_html=True)
+        st.markdown(
+            "<h2 style='color: #1F5D8D; margin-bottom: 0;'>EducaMap</h2>",
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            "<p style='color: #666; font-size: 0.8rem;'>Análise de Abrangência Escolar</p>",
+            unsafe_allow_html=True,
+        )
         st.markdown("---")
 
         st.sidebar.title("Filtros de Análise")
@@ -57,13 +86,13 @@ def render_radius_map():
             "Ensino Fundamental": "fundamental",
             "Ensino Médio": "médio",
             "Educação de Jovens Adultos": "jovens e adultos",
-            "Educação Profissional": "profissional"
+            "Educação Profissional": "profissional",
         }
-        
+
         selected_modalidades = st.multiselect(
             "Modalidade de Ensino",
             options=list(modalidades_map.keys()),
-            default=["Educação Infantil"]
+            default=["Educação Infantil"],
         )
 
         opcoes_porte = [
@@ -72,28 +101,30 @@ def render_radius_map():
             "Entre 51 e 200 matrículas de escolarização",
             "Entre 201 e 500 matrículas de escolarização",
             "Entre 501 e 1000 matrículas de escolarização",
-            "Mais de 1000 matrículas de escolarização"
+            "Mais de 1000 matrículas de escolarização",
         ]
-        
+
         selected_portes = st.multiselect(
             "Porte da Escola",
             options=opcoes_porte,
-            default=["Entre 201 e 500 matrículas de escolarização"]
+            default=["Entre 201 e 500 matrículas de escolarização"],
         )
 
         # --- LÓGICA DE FILTRAGEM ---
-        col_mod = 'Etapas e Modalidade de Ensino Oferecidas'
+        col_mod = "Etapas e Modalidade de Ensino Oferecidas"
         if selected_modalidades:
             keywords = [modalidades_map[name] for name in selected_modalidades]
-            pattern = '|'.join(keywords)
-            mask_modalidade = df[col_mod].fillna('').str.contains(pattern, case=False, na=False)
+            pattern = "|".join(keywords)
+            mask_modalidade = (
+                df[col_mod].fillna("").str.contains(pattern, case=False, na=False)
+            )
         else:
             mask_modalidade = pd.Series(False, index=df.index)
 
-        mask_final = mask_modalidade & df['Porte da Escola'].isin(selected_portes)
+        mask_final = mask_modalidade & df["Porte da Escola"].isin(selected_portes)
         num_escolas = len(df[mask_final])
         st.metric("Escolas Filtradas", num_escolas)
-        
+
         if num_escolas == 0:
             st.warning("Nenhuma escola corresponde aos filtros. Mostrando mapa base.")
 
@@ -108,21 +139,57 @@ def render_radius_map():
         zoom = 11
 
     m = folium.Map(
-        location=[center_lat, center_lon],
-        zoom_start=zoom,
-        tiles="OpenStreetMap"
+        location=[center_lat, center_lon], zoom_start=zoom, tiles="OpenStreetMap"
     )
+
+    # --- DESENHO DAS REGIÕES ADMINISTRATIVAS (SHAPEFILE) ---
+    if gdf_regioes is not None and not gdf_regioes.empty:
+        # Detecta dinamicamente a coluna de nome disponível no shapefile do DF
+        colunas_possiveis = ["nome", "ra_nome", "ra", "NM_RA"]
+        campo_nome = next(
+            (c for c in colunas_possiveis if c in gdf_regioes.columns),
+            gdf_regioes.columns[0],
+        )
+
+        folium.GeoJson(
+            gdf_regioes,
+            name="Regiões Administrativas",
+            style_function=lambda x: {
+                "fillColor": "#1F5D8D",  # Tom de azul combinando com a identidade do EducaMap
+                "color": "#113c5e",  # Linha de divisão das RAs
+                "weight": 1.5,
+                "fillOpacity": 0.15,  # Transparência suave para não esconder os círculos de raio
+            },
+            tooltip=folium.GeoJsonTooltip(
+                fields=[campo_nome], aliases=[""], localize=True
+            ),
+        ).add_to(m)
 
     # --- ADIÇÃO DE ELEMENTOS (APENAS SE HOUVER DADOS) ---
     if not df[mask_final].empty:
         for _, row in df[mask_final].iterrows():
-            radius_m, justificativa = get_urban_radius_logic(row['Porte da Escola'])
-            
+            radius_m, justificativa = get_urban_radius_logic(row["Porte da Escola"])
+
             # Cores dinâmicas
-            porte_txt = str(row['Porte da Escola']).lower()
-            color = "#1F5D8D" # Padrão Azul
-            if "até 50" in porte_txt: color = "#5fd819"
-            elif "mais de 1000" in porte_txt: color = "#ff8e1d"
+            # porte_txt = str(row["Porte da Escola"]).lower()
+            # color = "#1F5D8D"  # Padrão Azul
+            # if "até 50" in porte_txt:
+            #     color = "#5fd819"
+            # elif "mais de 1000" in porte_txt:
+            #     color = "#ff8e1d"
+
+            mapa_cores_porte = {
+                "Escola sem matrícula de escolarização": "#98FB98",
+                "Até 50 matrículas de escolarização": "#C0D870",
+                "Entre 51 e 200 matrículas de escolarização": "#E8D858",
+                "Entre 201 e 500 matrículas de escolarização": "#FCD04B",
+                "Entre 501 e 1000 matrículas de escolarização": "#FFA63A",
+                "Mais de 1000 matrículas de escolarização": "#FF7F24",
+            }
+
+            # Puxa a cor do dicionário usando o valor da linha atual.
+            # Se não achar nada, usa o Azul padrão do EducaMap ("#1F5D8D") como segurança.
+            color = mapa_cores_porte.get(row["Porte da Escola"], "#1F5D8D")
 
             folium.Circle(
                 location=[row["Latitude"], row["Longitude"]],
@@ -131,17 +198,25 @@ def render_radius_map():
                 fill=True,
                 fill_opacity=0.2,
                 weight=1,
-                popup=f"<b>{row['Escola']}</b><br>Raio: {radius_m}m"
+                popup=f"<b>{row['Escola']}</b><br>Raio: {radius_m}m",
             ).add_to(m)
 
             folium.Marker(
                 location=[row["Latitude"], row["Longitude"]],
                 icon=folium.Icon(color="blue", icon="graduation-cap", prefix="fa"),
-                tooltip=row['Escola']
+                tooltip=row["Escola"],
+                popup=f"<b>{row['Escola']}</b><br>{row['Endereço']}",
             ).add_to(m)
+
+            # folium.Marker(
+            #     location=[row["Latitude"], row["Longitude"]],
+            #     icon=folium.Icon(color="blue", icon="graduation-cap", prefix="fa"),
+            #     tooltip=row["Escola"],
+            # ).add_to(m)
 
     # O Mapa é renderizado SEMPRE, independentemente do filtro
     st_folium(m, width="100%", height=900, returned_objects=[])
+
 
 if __name__ == "__main__":
     render_radius_map()
