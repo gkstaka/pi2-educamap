@@ -1,7 +1,14 @@
 # 1. Imagem Python leve
 FROM python:3.11-slim
 
-# 2. Instala dependências para o PostgreSQL e o netcat para o healthcheck
+# # 2. Instala dependências para o PostgreSQL e o netcat para o healthcheck
+# RUN apt-get update && apt-get install -y \
+#     build-essential \
+#     libpq-dev \
+#     netcat-openbsd \
+#     && rm -rf /var/lib/apt/lists/*
+
+# 2. Instala dependências do PostgreSQL, netcat e ferramentas geoespaciais nativas do sistema
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \

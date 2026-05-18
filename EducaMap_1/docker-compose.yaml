@@ -10,9 +10,10 @@ services:
       POSTGRES_DB: educamap_db
     ports:
       - "5432:5432"
-    # Somente em produção
-    # volumes:
-    #   - postgres_data:/var/lib/postgresql/data
+
+      # Colocar isso quando for produção
+      # volumes:
+      # - postgres_data:/var/lib/postgresql/data
 
   web:
     build: .
@@ -27,6 +28,7 @@ services:
       - .:/EducaMap
     stdin_open: true
     tty: true
-# Somente em produção
+
+# Iniciar isso para produção
 # volumes:
-#   postgres_data:
+  # postgres_data:

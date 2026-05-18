@@ -5,7 +5,6 @@ import re
 import pandas as pd
 from sqlalchemy import text
 from app.utils.model import engine
-import geopandas as gpd
 
 
 # TODO: Rever essa metodologia se baseando no "workability"
@@ -159,8 +158,6 @@ def load_inicial_data():
         project_root = Path(__file__).resolve().parent.parent
         csv_path = resolve_csv_path(project_root)
 
-        print()
-        print("=" * 60)
         print(f"Lendo dados de: {csv_path}")
         df = load_school_data(csv_path)
 
@@ -216,7 +213,6 @@ def load_inicial_data():
         df_resultados.to_sql("resultados", engine, if_exists="append", index=False)
 
         print("Banco de dados populado com sucesso!")
-        print("=" * 60)
     except Exception as e:
         print(f"Erro ao popular banco: {e}")
 
@@ -243,75 +239,5 @@ def load_data_from_postgres() -> pd.DataFrame:
     return df
 
 
-def carregar_shapefile_generico(caminho_shp: str, nome_tabela: str) -> bool:
-    """[Mantém Igual] Lê o arquivo com GeoPandas e envia ao PostGIS."""
-    if gpd is None:
-        print(f"Erro: GeoPandas não instalado para {nome_tabela}.")
-        return False
-    try:
-        print(f"Processando Shapefile: {nome_tabela}...")
-        gdf = gpd.read_file(caminho_shp)
-        if gdf.crs != "EPSG:4326":
-            gdf = gdf.to_crs(epsg=4326)
-        if "geometry" in gdf.columns:
-            gdf = gdf.rename_geometry("geom")
-
-        gdf.to_postgis(name=nome_tabela, con=engine, if_exists="replace", index=False)
-        print(f"✓ Sucesso: Tabela '{nome_tabela}' integrada ao PostGIS.")
-        return True
-    except Exception as e:
-        print(f"Erro no Shapefile {nome_tabela}: {e}")
-        return False
-
-
-def load_shapefiles_data() -> None:
-    """FUNÇÃO NOVA E ISOLADA: Faz apenas a varredura recursiva dos mapas."""
-    shapefiles_alvo = {
-        "equipamentos_de_saude.shp": "equipamentos_de_saude",
-        "equipamentos_de_seguranca.shp": "equipamentos_de_seguranca",
-        "espacos_comunitarios.shp": "espacos_comunitarios",
-        "espacos_culturais.shp": "espacos_culturais",
-        "feiras_livres.shp": "feiras_livres",
-        "mobiliario_esporte_e_lazer.shp": "mobiliario_esporte_e_lazer",
-        "parques_urbanos.shp": "parques_urbanos",
-        "limite_do_distrito_federal.shp": "limite_do_distrito_federal",
-        "regioes_administrativas.shp": "regioes_administrativas",
-    }
-
-    pasta_raiz_dados = Path("data/raw")
-    if not pasta_raiz_dados.exists():
-        print(f"Aviso: Pasta '{pasta_raiz_dados}' não encontrada. Pulando mapas.")
-        return
-
-    print()
-    print(f"Iniciando varredura RECURSIVA de Shapefiles em '{pasta_raiz_dados}'...")
-    arquivos_encontrados = {
-        caminho.name: str(caminho) for caminho in pasta_raiz_dados.rglob("*.shp")
-    }
-
-    contagem_sucesso = 0
-    for arquivo_alvo, nome_tabela in shapefiles_alvo.items():
-        if arquivo_alvo in arquivos_encontrados:
-            caminho_real = arquivos_encontrados[arquivo_alvo]
-            sucesso = carregar_shapefile_generico(caminho_real, nome_tabela)
-            if sucesso:
-                contagem_sucesso += 1
-        else:
-            print(f"[Aviso] Arquivo '{arquivo_alvo}' não encontrado nas subpastas.")
-
-    print(
-        f"=== PIPELINE GEOGRÁFICO: {contagem_sucesso} de {len(shapefiles_alvo)} mapas carregados ==="
-    )
-
-
-# --- BLOCO DE EXECUÇÃO MODIFICADO APENAS NA CHAMADA ---
 if __name__ == "__main__":
-    print("\n=== INICIANDO PIPELINE DE CARGA DE DADOS ===")
-
-    # 1. Roda a sua função atual do CSV (que você me disse que já funciona perfeitamente)
     load_inicial_data()
-
-    # 2. Roda a nova função dos Shapefiles de forma totalmente independente
-    load_shapefiles_data()
-
-    print("=== PIPELINE DE CARGA DE DADOS FINALIZADO ===\n")
