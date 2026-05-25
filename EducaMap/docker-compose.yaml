@@ -1,6 +1,5 @@
 services:
   db:
-    # image: postgres:15
     image: postgis/postgis:15-3.4
     container_name: postgres_educamap
     restart: always
@@ -10,9 +9,8 @@ services:
       POSTGRES_DB: educamap_db
     ports:
       - "5432:5432"
-    # Somente em produção
-    # volumes:
-    #   - postgres_data:/var/lib/postgresql/data
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   web:
     build: .
@@ -27,6 +25,5 @@ services:
       - .:/EducaMap
     stdin_open: true
     tty: true
-# Somente em produção
-# volumes:
-#   postgres_data:
+volumes:
+     postgres_data:

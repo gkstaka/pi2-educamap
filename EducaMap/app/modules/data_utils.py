@@ -2,6 +2,8 @@
 
 from pathlib import Path
 import re
+
+from shapely import errors
 import pandas as pd
 from sqlalchemy import text
 from app.utils.model import engine
@@ -155,6 +157,18 @@ def resolve_municipio_column(df: pd.DataFrame) -> str | None:
 
 def load_inicial_data():
     """Lê o CSV e popula o banco de dados PostgreSQL."""
+
+    try:
+        with engine.connect() as conn:
+            # Se a tabela existir e tiver registros: encerra!
+            res = conn.execute(text("SELECT COUNT(*) FROM escolas;")).fetchone()
+            if res and res[0] > 0:
+                print("[SSD SALVO!] Dados das escolas estão persistidos no banco.")
+                return
+    except Exception:
+        # Se a tabela não existir no primeiro boot, segue o fluxo de criação.
+        pass
+
     try:
         project_root = Path(__file__).resolve().parent.parent
         csv_path = resolve_csv_path(project_root)
@@ -196,6 +210,12 @@ def load_inicial_data():
                 "Porte da Escola": "porte_escola",
                 "Etapas e Modalidade de Ensino Oferecidas": "modalidade_ensino",
             }
+        )
+
+        # Garante que coordenadas em branco seja Nulo/NaN
+        df_escolas["latitude"] = pd.to_numeric(df_escolas["latitude"], errors="coerce")
+        df_escolas["longitude"] = pd.to_numeric(
+            df_escolas["longitude"], errors="coerce"
         )
 
         df_escolas.to_sql("escolas", engine, if_exists="append", index=False)
@@ -256,7 +276,9 @@ def carregar_shapefile_generico(caminho_shp: str, nome_tabela: str) -> bool:
         if "geometry" in gdf.columns:
             gdf = gdf.rename_geometry("geom")
 
-        gdf.to_postgis(name=nome_tabela, con=engine, if_exists="replace", index=False)
+        gdf.to_postgis(
+            name=nome_tabela, con=engine, if_exists="replace", index=False
+        )  # ver comando para nao fazer nada do nothing
         print(f"✓ Sucesso: Tabela '{nome_tabela}' integrada ao PostGIS.")
         return True
     except Exception as e:
@@ -265,7 +287,21 @@ def carregar_shapefile_generico(caminho_shp: str, nome_tabela: str) -> bool:
 
 
 def load_shapefiles_data() -> None:
-    """FUNÇÃO NOVA E ISOLADA: Faz apenas a varredura recursiva dos mapas."""
+    """Faz apenas a varredura recursiva dos mapas."""
+
+    try:
+        with engine.connect() as conn:
+            # Se a tabela existir e possuir dados: encerra!
+            res = conn.execute(
+                text("SELECT COUNT(*) FROM regioes_administrativas;")
+            ).fetchone()
+            if res and res[0] > 0:
+                print("[SSD SALVO] Shapefiles persistidos no banco.")
+                return
+    except Exception:
+        # Se não tiver nada, cria o banco e popula com os shapefiles.
+        pass
+
     shapefiles_alvo = {
         "equipamentos_de_saude.shp": "equipamentos_de_saude",
         "equipamentos_de_seguranca.shp": "equipamentos_de_seguranca",
