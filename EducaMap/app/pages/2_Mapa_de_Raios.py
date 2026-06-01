@@ -2,6 +2,7 @@ import streamlit as st
 import folium
 import pandas as pd
 from streamlit_folium import st_folium
+from folium.plugins import BeautifyIcon
 from app.modules.data_utils import load_data_from_postgres
 import geopandas as gpd
 from app.utils.model import engine
@@ -150,33 +151,71 @@ def render_radius_map():
             (c for c in colunas_possiveis if c in gdf_regioes.columns),
             gdf_regioes.columns[0],
         )
+        # campo_ra = next(c for c in ra_codigo if c gdf_regioes.columns),gdf_regioes.columns[0],)
+
+        # Dicionário de cores inserido aqui dentro ou no escopo global
+        mapa_cores_ras = {
+            "PLANO PILOTO": "#1F5D8D",
+            "GAMA": "#4682B4",
+            "TAGUATINGA": "#008080",
+            "BRAZLÃNDIA": "#2E8B57",
+            "SOBRADINHO": "#3CB371",
+            "PLANALTINA": "#556B2F",
+            "PARANOÃ": "#6B8E23",
+            "NÃCLEO BANDEIRANTE": "#8B4513",
+            "CEILÃNDIA": "#A0522D",
+            "GUARÃ": "#CD853F",
+            "CRUZEIRO": "#D2691E",
+            "SAMAMBAIA": "#B22222",
+            "SANTA MARIA": "#FF4500",
+            "SÃO SEBASTIÃO": "#FF8C00",
+            "RECANTO DAS EMAS": "#E9967A",
+            "LAGO SUL": "#4B0082",
+            "LAGO NORTE": "#483D8B",
+            "CANDANGOLÃNDIA": "#6A5ACD",
+            "ÃGUAS CLARAS": "#7B68EE",
+            "RIACHO FUNDO": "#9370DB",
+            "SUDOESTE/OCTOGONAL": "#8A2BE2",
+            "VARJÃO": "#C71585",
+            "PARK WAY": "#DB7093",
+            "SCIA": "#FF1493",
+            "SOBRADINHO II": "#FF69B4",
+            "JARDIM BOTÃNICO": "#20B2AA",
+            "ITAPOÃ": "#00CED1",
+            "SIA": "#708090",
+            "VICENTE PIRES": "#778899",
+            "FERCAL": "#5F9EA0",
+            "SOL NASCENTE E POR DO SOL": "#D2B48C",
+            "ARNIQUEIRA": "#BC8F8F",
+            "ARAPOANGA": "#F4A460",
+            "AGUA QUENTE": "#DEB887",
+        }
 
         folium.GeoJson(
             gdf_regioes,
             name="Regiões Administrativas",
-            style_function=lambda x: {
-                "fillColor": "#1F5D8D",  # Tom de azul combinando com a identidade do EducaMap
-                "color": "#113c5e",  # Linha de divisão das RAs
-                "weight": 1.5,
-                "fillOpacity": 0.15,  # Transparência suave para não esconder os círculos de raio
+            style_function=lambda feature: {
+                # Puxa o nome da RA da linha atual do Shapefile e busca a cor correspondente
+                "fillColor": mapa_cores_ras.get(
+                    feature["properties"].get(campo_nome, ""), "#1F5D8D"
+                ),
+                "color": "#113c5e",  # Linha de contorno fina separando as RAs
+                "weight": 1.2,
+                "fillOpacity": 0.25,  # Opacidade um pouco maior para evidenciar as cores sem cobrir as escolas
             },
             tooltip=folium.GeoJsonTooltip(
-                fields=[campo_nome], aliases=[""], localize=True
+                fields=[campo_nome], aliases=["RA:"], localize=True
             ),
         ).add_to(m)
+
+    # --- CRIAÇÃO DAS CAMADAS ---
+    camada_raios = folium.FeatureGroup(name="Raio de Abrangência", show=True)
+    camada_escolas = folium.FeatureGroup(name="Escolas Filtradas", show=True)
 
     # --- ADIÇÃO DE ELEMENTOS (APENAS SE HOUVER DADOS) ---
     if not df[mask_final].empty:
         for _, row in df[mask_final].iterrows():
             radius_m, justificativa = get_urban_radius_logic(row["Porte da Escola"])
-
-            # Cores dinâmicas
-            # porte_txt = str(row["Porte da Escola"]).lower()
-            # color = "#1F5D8D"  # Padrão Azul
-            # if "até 50" in porte_txt:
-            #     color = "#5fd819"
-            # elif "mais de 1000" in porte_txt:
-            #     color = "#ff8e1d"
 
             mapa_cores_porte = {
                 "Escola sem matrícula de escolarização": "#98FB98",
@@ -187,34 +226,48 @@ def render_radius_map():
                 "Mais de 1000 matrículas de escolarização": "#FF7F24",
             }
 
-            # Puxa a cor do dicionário usando o valor da linha atual.
-            # Se não achar nada, usa o Azul padrão do EducaMap ("#1F5D8D") como segurança.
-            color = mapa_cores_porte.get(row["Porte da Escola"], "#1F5D8D")
+            mapa_cores_localizacao = {
+                "Urbana": "darkblue",
+                "Rural": "darkgreen",
+            }
+
+            color_circle = mapa_cores_porte.get(row["Porte da Escola"], "#1F5D8D")
+            color_marker = mapa_cores_localizacao.get(row["Localização"], "gray")
+
+            popup_text_marker = f"<small><b>{row['Escola']}</b><br>{row['Endereço']}<br><b>Localização:</b><br>{row['Localização']}<br><b>Rede:</b><br>{row['Dependência Administrativa']}</small>"
+            popup_text_circle = f"<small><b>{row['Escola']}</b><br>Raio: {radius_m}m<br><b>Justificativa:</b><br>{justificativa}</small>"
 
             folium.Circle(
                 location=[row["Latitude"], row["Longitude"]],
                 radius=radius_m,
-                color=color,
+                color=color_circle,
                 fill=True,
                 fill_opacity=0.2,
                 weight=1,
-                popup=f"<b>{row['Escola']}</b><br>Raio: {radius_m}m",
-            ).add_to(m)
+                popup=popup_text_circle,
+            ).add_to(camada_raios)
 
             folium.Marker(
                 location=[row["Latitude"], row["Longitude"]],
-                icon=folium.Icon(color="blue", icon="graduation-cap", prefix="fa"),
-                tooltip=row["Escola"],
-                popup=f"<b>{row['Escola']}</b><br>{row['Endereço']}",
-            ).add_to(m)
+                icon=BeautifyIcon(
+                    icon="graduation-cap",
+                    iconSize=[30, 30],
+                    prefix="fa",
+                    icon_shape="circle",
+                    background_color=color_marker,
+                    border_color="#000000",
+                    border_width=1,
+                    text_color="#FFFFFF",
+                ),
+                tooltip=f"<small>{row['Escola']}</small>",
+                popup=popup_text_marker,
+            ).add_to(camada_escolas)
 
-            # folium.Marker(
-            #     location=[row["Latitude"], row["Longitude"]],
-            #     icon=folium.Icon(color="blue", icon="graduation-cap", prefix="fa"),
-            #     tooltip=row["Escola"],
-            # ).add_to(m)
+    camada_raios.add_to(m)
+    camada_escolas.add_to(m)
 
-    # O Mapa é renderizado SEMPRE, independentemente do filtro
+    folium.LayerControl(position="topright", collapsed=False).add_to(m)
+
     st_folium(m, width="100%", height=900, returned_objects=[])
 
 
