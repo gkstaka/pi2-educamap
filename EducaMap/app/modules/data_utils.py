@@ -1,6 +1,7 @@
 # NOTE: Popula o banco de dados conforme SQLAlchemy --> model.py
 
 from pathlib import Path
+import json
 import re
 
 from shapely import errors
@@ -142,6 +143,44 @@ def resolve_csv_path(project_root: Path) -> Path:
 
     # Fallback para execução local fora do Docker
     return project_root / "listaEscolasDFInep.csv"
+
+
+def load_matriculas_data() -> pd.DataFrame | None:
+    """
+    Carrega o JSON de matrículas 2023 da rede pública do DF.
+    Cada chave é o código da escola (CO_ENTIDADE); cada valor é um registro
+    com campos demográficos e totais de matrícula por nível de ensino.
+    Retorna None se o arquivo não for encontrado.
+    """
+    candidates = [
+        # Ambiente Docker
+        Path("/EducaMap/data/raw/Governanca_educa_df/matriculas_rede_publica_de_ensino_json_2023.json"),
+        # Execução local
+        Path(__file__).resolve().parent.parent.parent
+        / "data/raw/Governanca_educa_df/matriculas_rede_publica_de_ensino_json_2023.json",
+    ]
+
+    for path in candidates:
+        if path.exists():
+            try:
+                with open(path, encoding="utf-8") as f:
+                    data = json.load(f)
+                df = pd.DataFrame.from_dict(data, orient="index")
+                # Converte colunas numéricas relevantes
+                numeric_cols = [
+                    "MAT_EI_TOTAL", "MAT_EF_INI", "MAT_EF_FIN", "MAT_EF_TOTAL",
+                    "MAT_EM_TOTAL", "MAT_EJA_TOTAL", "MAT_EP_TOTAL", "MATRÍCULA",
+                    "MAT_CRECHE", "MAT_PRE",
+                ]
+                for col in numeric_cols:
+                    if col in df.columns:
+                        df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
+                return df
+            except Exception as e:
+                print(f"[load_matriculas_data] Erro ao carregar JSON: {e}")
+                return None
+
+    return None
 
 
 def resolve_municipio_column(df: pd.DataFrame) -> str | None:
