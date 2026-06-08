@@ -5,3 +5,4 @@ __pycache__/
 venv/
 .streamlit/
 .DS_Store
+data/raw/OverpassAPI
