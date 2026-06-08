@@ -5,8 +5,6 @@ import json
 import re
 
 from shapely import errors
-from shapely.geometry import Point, LineString, MultiLineString
-import xml.etree.ElementTree as ET
 import requests
 import pandas as pd
 from sqlalchemy import text
@@ -378,102 +376,39 @@ def _garantir_camada_transporte() -> None:
 
 def carregar_camada_onibus_osm() -> bool:
     """
-    Lê o extrato local do OpenStreetMap (Overpass API, formato XML) e extrai
-    paradas de ônibus (`highway=bus_stop` / `public_transport=platform|stop_position`)
-    e linhas de ônibus (relations com `route=bus`), persistindo como tabelas
-    PostGIS `paradas_onibus_osm` (pontos) e `linhas_onibus_osm` (linhas).
+    Lê os extratos pré-processados de paradas e linhas de ônibus do
+    OpenStreetMap (GeoJSON, já filtrados a partir do extrato bruto da
+    Overpass API — ~2,2 GB de XML reduzidos a ~1 MB com apenas as feições
+    relevantes) e persiste como tabelas PostGIS `paradas_onibus_osm`
+    (pontos) e `linhas_onibus_osm` (linhas).
+
+    Os GeoJSONs em `data/raw/onibus_osm/` foram gerados uma única vez a
+    partir do extrato bruto (`highway=bus_stop` / `public_transport=platform
+    |stop_position` para paradas, relations `route=bus` para linhas) — ver
+    histórico do projeto para o script de extração original.
     """
-    caminhos = [
-        Path("/EducaMap/data/raw/OverpassAPI"),
-        Path(__file__).resolve().parent.parent.parent / "data/raw/OverpassAPI",
+    base_dirs = [
+        Path("/EducaMap/data/raw/onibus_osm"),
+        Path(__file__).resolve().parent.parent.parent / "data/raw/onibus_osm",
     ]
-    caminho = next((c for c in caminhos if c.exists()), None)
-    if caminho is None:
-        print("[carregar_camada_onibus_osm] Arquivo 'OverpassAPI' não encontrado.")
+    base_dir = next((d for d in base_dirs if d.exists()), None)
+    if base_dir is None:
+        print("[carregar_camada_onibus_osm] Diretório 'onibus_osm' não encontrado.")
+        return False
+
+    caminho_paradas = base_dir / "paradas_onibus_osm.geojson"
+    caminho_linhas = base_dir / "linhas_onibus_osm.geojson"
+    if not caminho_paradas.exists() or not caminho_linhas.exists():
+        print("[carregar_camada_onibus_osm] GeoJSONs de paradas/linhas não encontrados.")
         return False
 
     try:
-        nodes: dict[int, tuple[float, float]] = {}
-        ways: dict[int, list[int]] = {}
-        paradas = []
-        linhas_raw = []
+        gdf_paradas = gpd.read_file(caminho_paradas).rename_geometry("geom")
+        gdf_linhas = gpd.read_file(caminho_linhas).rename_geometry("geom")
 
-        context = ET.iterparse(str(caminho), events=("start", "end"))
-        _, root = next(context)
-
-        cur_kind = cur_id = cur_lat = cur_lon = None
-        cur_tags: dict[str, str] = {}
-        cur_nds: list[int] = []
-        cur_members: list[int] = []
-
-        for event, elem in context:
-            tag = elem.tag
-            if event == "start":
-                if tag in ("node", "way", "relation"):
-                    cur_kind = tag
-                    cur_id = int(elem.get("id"))
-                    cur_tags, cur_nds, cur_members = {}, [], []
-                    if tag == "node":
-                        cur_lat = float(elem.get("lat"))
-                        cur_lon = float(elem.get("lon"))
-                continue
-
-            if tag == "tag" and cur_kind is not None:
-                cur_tags[elem.get("k")] = elem.get("v")
-            elif tag == "nd" and cur_kind == "way":
-                cur_nds.append(int(elem.get("ref")))
-            elif tag == "member" and cur_kind == "relation" and elem.get("type") == "way":
-                cur_members.append(int(elem.get("ref")))
-            elif tag == "node":
-                nodes[cur_id] = (cur_lon, cur_lat)
-                tipo_pt = cur_tags.get("public_transport")
-                if cur_tags.get("highway") == "bus_stop" or tipo_pt in ("platform", "stop_position"):
-                    paradas.append({
-                        "id_osm": cur_id, "nome": cur_tags.get("name"),
-                        "tipo": tipo_pt or cur_tags.get("highway"),
-                        "ref": cur_tags.get("ref"),
-                        "geom": Point(cur_lon, cur_lat),
-                    })
-                cur_kind = None
-            elif tag == "way":
-                ways[cur_id] = cur_nds
-                cur_kind = None
-            elif tag == "relation":
-                if cur_tags.get("route") == "bus":
-                    linhas_raw.append({
-                        "id_osm": cur_id,
-                        "nome": cur_tags.get("name"),
-                        "ref": cur_tags.get("ref"),
-                        "way_ids": list(cur_members),
-                    })
-                cur_kind = None
-
-            if tag in ("node", "way", "relation"):
-                elem.clear()
-                root.clear()
-
-        linhas = []
-        for lr in linhas_raw:
-            segmentos = []
-            for wid in lr["way_ids"]:
-                nd_ids = ways.get(wid)
-                if not nd_ids:
-                    continue
-                coords = [nodes[n] for n in nd_ids if n in nodes]
-                if len(coords) >= 2:
-                    segmentos.append(LineString(coords))
-            if segmentos:
-                linhas.append({
-                    "id_osm": lr["id_osm"], "nome": lr["nome"], "ref": lr["ref"],
-                    "geom": MultiLineString(segmentos) if len(segmentos) > 1 else segmentos[0],
-                })
-
-        if not paradas:
-            print("[carregar_camada_onibus_osm] Nenhuma parada de ônibus encontrada no extrato OSM.")
+        if gdf_paradas.empty:
+            print("[carregar_camada_onibus_osm] Nenhuma parada de ônibus encontrada no extrato.")
             return False
-
-        gdf_paradas = gpd.GeoDataFrame(paradas, geometry="geom", crs="EPSG:4326")
-        gdf_linhas = gpd.GeoDataFrame(linhas, geometry="geom", crs="EPSG:4326")
 
         gdf_paradas.to_postgis("paradas_onibus_osm", engine, if_exists="replace", index=False)
         gdf_linhas.to_postgis("linhas_onibus_osm", engine, if_exists="replace", index=False)
