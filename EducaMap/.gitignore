@@ -6,3 +6,5 @@ venv/
 .streamlit/
 .DS_Store
 data/raw/OverpassAPI
+.pub
+.key
